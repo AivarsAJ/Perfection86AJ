@@ -84,28 +84,46 @@
     }
     
     /* Mobile Header */
-    .hero-mobile-logo {
+    .hero-mobile-header {
       display: none;
       position: fixed;
-      top: 15px;
-      left: 20px;
-      height: 40px;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px 20px;
       z-index: 1001;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-mobile-header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+    }
+    
+    .hero-mobile-logo {
+      height: 40px;
+      width: auto;
     }
     
     .hero-mobile-menu-btn {
-      display: none;
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      background: rgba(26, 26, 26, 0.9);
+      background: transparent;
       border: 2px solid rgba(255, 255, 255, 0.3);
       color: #fff;
       font-size: 24px;
       padding: 8px 15px;
       cursor: pointer;
-      z-index: 1001;
       border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .hero-mobile-menu-btn:hover {
+      border-color: var(--lightning-red);
+      color: var(--lightning-red);
     }
     
     .hero-mobile-dropdown {
@@ -536,16 +554,20 @@
     
     /* Responsive */
     @media (max-width: 768px) {
+      .hero-header-overlay {
+        display: none;
+      }
+      
       .hero-header-nav {
         display: none;
       }
       
-      .hero-mobile-logo,
-      .hero-mobile-menu-btn {
+      .hero-mobile-header {
         display: block;
       }
       
       .painting-hero {
+        margin-top: 0;
         padding: 100px 20px 60px;
         min-height: 50vh;
       }
@@ -585,6 +607,7 @@
       
       .images-grid {
         grid-template-columns: 1fr;
+        margin: 20px 0 0 0;
       }
       
       .contact-form-container {
@@ -643,9 +666,13 @@
     </nav>
   </div>
 
-  <!-- Mobile Logo and Menu -->
-  <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
-  <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+  <!-- Mobile Header -->
+  <div class="hero-mobile-header">
+    <div class="hero-mobile-header-content">
+      <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
+      <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </div>
   <div class="hero-mobile-dropdown" id="hero-mobile-dropdown">
     <a href="./index.html">Sākums</a>
     <a href="./index.html#services">Pakalpojumi</a>
@@ -691,7 +718,7 @@
   <!-- Main Content -->
   <div class="painting-container">
     <!-- Process Section -->
-    <section class="content-section">
+    <section class="content-section" style="margin-top: -30px;">
       <h2 class="section-title">Kā notiek auto krāsošana Perfection 86 darbnīcā?</h2>
       <p>Lai arī katrs projekts ir individuāls, visi standarta krāsošanas darbi sastāv no dažiem vai visiem šiem soļiem. Apskatīsim, kā notiek automašīnas krāsošana standarta situācijā, soli pa solim mūsu darbnīcā.</p>
       
@@ -732,7 +759,7 @@
     </section>
 
     <!-- What to Know Section -->
-    <section class="content-section">
+    <section class="content-section" style="margin-top: -40px;">
       <h2>Kas jāzina pirms auto krāsošanas?</h2>
       
       <h3>VAI IR VĒRTS KRĀSOT MANU AUTO?</h3>
@@ -742,9 +769,8 @@
       <p>Kā jau minējām, krāsošana ir sarežģīts un laikietilpīgs process. Tāpēc nododot savu auto mūsu speciālistu rokās, jārēķinās ar to, ka automašīna var būt Jums būt nepieejama no vairākām dienām līdz nedēļai, atkarībā no darbu sarežģītības.</p>
       
       <h3>KRĀSOŠANAS VEIDI</h3>
-      <p>Galvenokārt nodarbojamies ar šādu veidu krāsošanas darbiem.</p>
       
-      <ul class="info-list">
+      <ul class="info-list" style="margin-top: -15px;">
         <li>LOKĀLA, JEB ATSEVIŠĶU DETAĻU KRĀSOŠANA.</li>
         <li>PILNA VIRSBŪVES KRĀSOŠANA.</li>
       </ul>
