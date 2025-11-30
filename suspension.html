@@ -84,28 +84,46 @@
     }
     
     /* Mobile Header */
-    .hero-mobile-logo {
+    .hero-mobile-header {
       display: none;
       position: fixed;
-      top: 15px;
-      left: 20px;
-      height: 40px;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px 20px;
       z-index: 1001;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-mobile-header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+    }
+    
+    .hero-mobile-logo {
+      height: 40px;
+      width: auto;
     }
     
     .hero-mobile-menu-btn {
-      display: none;
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      background: rgba(26, 26, 26, 0.9);
+      background: transparent;
       border: 2px solid rgba(255, 255, 255, 0.3);
       color: #fff;
       font-size: 24px;
       padding: 8px 15px;
       cursor: pointer;
-      z-index: 1001;
       border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .hero-mobile-menu-btn:hover {
+      border-color: var(--lightning-red);
+      color: var(--lightning-red);
     }
     
     .hero-mobile-dropdown {
@@ -232,6 +250,17 @@
         0 2px 4px rgba(0, 0, 0, 0.3),
         0 0 8px rgba(255, 255, 255, 0.1);
       color: #ffffff;
+    }
+    
+    .content-section h3 {
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      margin-top: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--lightning-red);
     }
     
     .content-section p {
@@ -423,7 +452,7 @@
     .footer {
       background: #0a0a0a;
       padding: 60px 40px 30px;
-      margin-top: 100px;
+      margin-top: 0;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
     
@@ -506,16 +535,20 @@
     
     /* Responsive */
     @media (max-width: 768px) {
+      .hero-header-overlay {
+        display: none;
+      }
+      
       .hero-header-nav {
         display: none;
       }
       
-      .hero-mobile-logo,
-      .hero-mobile-menu-btn {
+      .hero-mobile-header {
         display: block;
       }
       
       .suspension-hero {
+        margin-top: 0;
         padding: 100px 20px 60px;
         min-height: 50vh;
       }
@@ -547,6 +580,10 @@
       
       .content-section h2 {
         font-size: 2rem;
+      }
+      
+      .content-section h3 {
+        font-size: 1.5rem;
       }
       
       .images-grid {
@@ -605,9 +642,13 @@
     </nav>
   </div>
 
-  <!-- Mobile Logo and Menu -->
-  <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
-  <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+  <!-- Mobile Header -->
+  <div class="hero-mobile-header">
+    <div class="hero-mobile-header-content">
+      <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
+      <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </div>
   <div class="hero-mobile-dropdown" id="hero-mobile-dropdown">
     <a href="./index.html">Sākums</a>
     <a href="./index.html#services">Pakalpojumi</a>
@@ -652,24 +693,21 @@
 
   <!-- Main Content -->
   <div class="suspension-container">
-    <!-- Purpose Section -->
-    <section class="content-section">
-      <h2>Ritošās daļas nozīme</h2>
-      <p>Automašīnas ritošās daļas galvenais uzdevums ir samazināt triecienus braucot pa nelīdzenu ceļa virsmu, kā arī nodrošināt drošu un ērtu pārvietošanos, tāpēc ritošā daļa regulāri tiek pakļauta paaugstinātai slodzei un to būtu nepieciešams pārbaudīt vismaz reizi pusgadā.</p>
-    </section>
-
     <!-- Warning Signs Section -->
     <section class="content-section">
-      <h2>Seko līdzi auto stāvoklim</h2>
+      <h2 style="display: flex; align-items: center; gap: 15px;">
+        Seko līdzi auto stāvoklim
+        <img src="./RED.png" alt="Warning" style="height: 40px; width: auto; margin-top: -5px;">
+      </h2>
       
-      <p><strong>Stūres problēmas</strong></p>
+      <h3>Stūres problēmas</h3>
       <p>Ja braucot ar savu automašīnu jūtat, ka stūre lāga vairs neklausa, veic brīvkustības, velk pa labi vai kreisi, iespējams, ka ir bojāta stūrēšanas iekārta vai automašīnas ritošās daļas detaļas.</p>
       
-      <p><strong>Pēc trieciena</strong></p>
+      <h3>Pēc trieciena</h3>
       <p>Ja ritošā daļa saņēmusi spēcīgu triecienu (satiksmes negadījums, iebraukšana bedrē, sadursme ar šķērsli), lielākajā riska grupā ir gultņi, piedziņas vārpstas, šarnīri.</p>
       
-      <p><strong>Trokšņi un vibrācijas</strong></p>
-      <p>Ja braucot dzirdat asus trokšņus, jūtat netipisku vibrāciju, iespējams, ka atskrūvējusies vai nolūzusi kāda no ritošo daļu stiprinošajām skrūvēm vai arī progresējusi iepriekš radusies plaisa.</p>
+      <h3>Trokšņi un vibrācijas</h3>
+      <p style="margin-bottom: 0;">Ja braucot dzirdat asus trokšņus, jūtat netipisku vibrāciju, iespējams, ka atskrūvējusies vai nolūzusi kāda no ritošo daļu stiprinošajām skrūvēm vai arī progresējusi iepriekš radusies plaisa.</p>
     </section>
 
     <!-- Images Section -->
@@ -682,6 +720,12 @@
           <img src="./apkope2.webp" alt="Ritošās daļas remonts">
         </div>
       </div>
+    </section>
+
+    <!-- Purpose Section -->
+    <section class="content-section" style="margin-top: -40px; margin-bottom: 0;">
+      <h2>Ritošās daļas nozīme</h2>
+      <p style="margin-bottom: 0;">Automašīnas ritošās daļas galvenais uzdevums ir samazināt triecienus braucot pa nelīdzenu ceļa virsmu, kā arī nodrošināt drošu un ērtu pārvietošanos, tāpēc ritošā daļa regulāri tiek pakļauta paaugstinātai slodzei un to būtu nepieciešams pārbaudīt vismaz reizi pusgadā.</p>
     </section>
   </div>
 

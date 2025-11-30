@@ -108,28 +108,46 @@
     }
     
     /* Mobile Header */
-    .hero-mobile-logo {
+    .hero-mobile-header {
       display: none;
       position: fixed;
-      top: 15px;
-      left: 20px;
-      height: 40px;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px 20px;
       z-index: 1001;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .hero-mobile-header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+    }
+    
+    .hero-mobile-logo {
+      height: 40px;
+      width: auto;
     }
     
     .hero-mobile-menu-btn {
-      display: none;
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      background: rgba(26, 26, 26, 0.9);
+      background: transparent;
       border: 2px solid rgba(255, 255, 255, 0.3);
       color: #fff;
       font-size: 24px;
       padding: 8px 15px;
       cursor: pointer;
-      z-index: 1001;
       border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .hero-mobile-menu-btn:hover {
+      border-color: var(--lightning-red);
+      color: var(--lightning-red);
     }
     
     .hero-mobile-dropdown {
@@ -386,7 +404,7 @@
       -webkit-clip-path: polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%);
       clip-path: polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%);
       background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(255, 0, 0, 0.05));
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      border: none;
       position: relative;
     }
     
@@ -416,11 +434,15 @@
     }
     
     .tm-img-container-1 {
-      background-image: url('./hes.webp');
+      background-image: url('./og.webp');
     }
     
     .tm-img-container-2 {
       background-image: url('./hes.webp');
+    }
+    
+    .tm-img-container-4 {
+      background-image: url('./og3.jpg');
     }
     
     .tm-section-2-header {
@@ -442,6 +464,16 @@
       margin-bottom: 20px;
     }
     
+    .tm-section-2-text p strong {
+      color: var(--lightning-red);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    
     .tm-p-ml {
       margin-left: 0;
     }
@@ -457,7 +489,7 @@
       clip-path: polygon(0 0, 86% 0, 100% 100%, 14% 100%);
       min-height: 560px;
       background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(255, 0, 0, 0.05));
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      border: none;
       position: relative;
       display: flex;
       align-items: center;
@@ -484,7 +516,7 @@
     }
     
     .tm-img-container-3 {
-      background-image: url('./3.jpg');
+      background-image: url('./og2.jpg');
       width: 100%;
       height: 100%;
       background-repeat: no-repeat;
@@ -499,7 +531,7 @@
     }
     
     .tm-section-3-text {
-      text-align: center;
+      text-align: left;
       width: 100%;
     }
     
@@ -522,6 +554,16 @@
       margin-bottom: 30px;
     }
     
+    .tm-section-3-text p strong {
+      color: var(--lightning-red);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    
     .tm-welcome-icon {
       font-size: 5rem;
       color: var(--lightning-red);
@@ -538,7 +580,7 @@
     .pricing-content {
       max-width: 1400px;
       margin: 0 auto;
-      margin-top: -20px;
+      margin-top: -60px;
     }
     
     .pricing-intro {
@@ -558,7 +600,7 @@
       position: relative;
       padding-top: 0;
       padding-bottom: 0;
-      margin: -40px auto -200px;
+      margin: 40px auto -300px;
       transform: translateX(-35px);
     }
     
@@ -572,7 +614,7 @@
     .pricing-item {
       position: absolute;
       width: 450px;
-      height: 550px;
+      height: 520px;
       left: 50%;
       top: 50%;
       transform-style: preserve-3d;
@@ -582,7 +624,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-top: 20px;
+      padding-bottom: 0;
     }
     
     .pricing-item::before {
@@ -601,7 +645,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      margin-top: 0;
     }
     
     .pricing-icon-container i {
@@ -816,16 +861,20 @@
     
     /* Responsive */
     @media (max-width: 768px) {
+      .hero-header-overlay {
+        display: none;
+      }
+      
       .hero-header-nav {
         display: none;
       }
       
-      .hero-mobile-logo,
-      .hero-mobile-menu-btn {
+      .hero-mobile-header {
         display: block;
       }
       
       .restoration-hero {
+        margin-top: 0;
         padding: 100px 20px 60px;
         min-height: 50vh;
       }
@@ -989,9 +1038,13 @@
     </nav>
   </div>
 
-  <!-- Mobile Logo and Menu -->
-  <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
-  <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+  <!-- Mobile Header -->
+  <div class="hero-mobile-header">
+    <div class="hero-mobile-header-content">
+      <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
+      <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </div>
   <div class="hero-mobile-dropdown" id="hero-mobile-dropdown">
     <a href="./index.html">Sākums</a>
     <a href="./index.html#services">Pakalpojumi</a>
@@ -1042,7 +1095,7 @@
           <div class="tm-img-container tm-img-container-1"></div>
         </div>
         <div class="tm-section-2-right tm-bg-primary">
-          <div class="tm-section-2-text">
+          <div class="tm-section-2-text" style="padding-left: 20px;">
             <p><strong>Iepazīšanās</strong></p>
             <p>Restaurācija sākas ar iepazīšanos ar auto un tā sākotnējo novērtējumu. Tiek apkopota informācija, fotogrāfijas un iespējamie defekti, lai sagatavotu provizorisku darba plānu un izmaksu aprēķinu.</p>
             <p class="tm-p-ml"><strong>Izjaukšana, projekta novērtēšana, cenas sastādīšana</strong></p>
@@ -1059,9 +1112,9 @@
       <div class="tm-section-3-inner">
         <div class="tm-section-3-left tm-bg-primary">
           <div class="tm-section-3-text">
-            <p><strong>4. Krāsošana</strong></p>
+            <p><strong>Krāsošana</strong></p>
             <p>Pirms krāsošanas virsma tiek rūpīgi nomazgāta un nožāvēta. Tiek izvēlēta piemērotākā krāsa un uzklāšanas metode. Krāsa tiek klāta vairākās kārtās un pārsegta ar laku, pēc tam auto nepieciešamības gadījumā nopulē.</p>
-            <p><strong>5. Dzinēja un saistīto agregātu remonts</strong></p>
+            <p><strong>Dzinēja un saistīto agregātu remonts</strong></p>
             <p>Dzinējs tiek izjaukts, defektēts un komplektēts ar jaunām vai atjaunotām detaļām, pārbaudot bloku un galvu. Mehāniķis arī atjauno šasiju un ritošo daļu, nodrošinot auto tehnisko pilnvērtību.</p>
           </div>
         </div>
@@ -1075,15 +1128,15 @@
     <section class="process-section">
       <div class="tm-section-2-inner">
         <div class="tm-section-2-left">
-          <div class="tm-img-container tm-img-container-1"></div>
+          <div class="tm-img-container tm-img-container-4"></div>
         </div>
         <div class="tm-section-2-right tm-bg-primary">
-          <div class="tm-section-2-text">
-            <p><strong>6. Salona atjaunošana</strong></p>
+          <div class="tm-section-2-text" style="padding-left: 20px;">
+            <p><strong>Salona atjaunošana</strong></p>
             <p>Salona restaurāciju veic sadarbības speciālisti. Bojātās vai visas salona daļas tiek noņemtas un nogādātas meistaram kvalitatīvai atjaunošanai.</p>
-            <p class="tm-p-ml"><strong>7. Salikšana</strong></p>
+            <p class="tm-p-ml"><strong>Salikšana</strong></p>
             <p>Noslēgumā auto tiek salikts kopā: uzstāda atjaunotās un jaunās detaļas, iemontē dzinēju un salonu. Šis posms prasa lielu pieredzi un precizitāti.</p>
-            <p><strong>8. Sagatavošana nodošanai klientam</strong></p>
+            <p><strong>Sagatavošana nodošanai klientam</strong></p>
             <p>Pirms nodošanas tiek pārbaudītas visas sistēmas, lai pārliecinātos par auto drošību un kvalitāti. Nobeigumā salons tiek iztīrīts un virsbūve nomazgāta, sagatavojot auto prezentēšanai klientam.</p>
           </div>
         </div>

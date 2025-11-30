@@ -564,9 +564,11 @@
       perspective: 1400px;
       position: relative;
       padding-top: 0;
+      padding-bottom: 0;
       margin: 0 auto;
       transform: translateX(-35px);
       margin-top: -20px;
+      margin-bottom: 0;
     }
     
     .carousel {
@@ -1694,8 +1696,13 @@
       .carousel-container {
         height: 550px;
         padding-top: 0;
-        transform: translateX(0);
+        padding-bottom: 0;
+        transform: translateX(-15px);
         margin: 0 auto;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       
       .carousel-item {
@@ -1744,14 +1751,11 @@
       }
       
       .carousel-controls {
-        bottom: -60px;
-        gap: 15px;
+        display: none;
       }
       
       .carousel-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        display: none;
       }
       
       
@@ -1789,8 +1793,13 @@
     @media (max-width: 600px) {
       .carousel-container {
         height: 500px;
-        transform: translateX(0);
+        padding-bottom: 0;
+        transform: translateX(-15px);
         margin: 0 auto;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       
       .carousel-item {
@@ -1884,18 +1893,24 @@
       }
       
       .services-section {
-        padding: 0 0 35px 0;
+        padding: 0 0 0 0;
         margin-top: -60px;
+        margin-bottom: 0;
       }
       
       .services-offered-section {
-        padding: 15px 0 60px 0;
-        margin-top: -25px;
+        padding: 0 0 60px 0;
+        margin-top: -80px;
+        position: relative;
+        z-index: 500;
+        background: #1a1a1a;
       }
       
       .services-section-title {
-        margin-top: 0;
-        padding-top: 20px;
+        margin-top: -30px;
+        padding-top: 0;
+        position: relative;
+        z-index: 501;
       }
       
       .partners-section {
@@ -1938,7 +1953,8 @@
         border-top: none;
         border-bottom: none;
         margin-bottom: 1rem;
-        background: #ffffff !important;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
       }
       
       .services-section-title {
