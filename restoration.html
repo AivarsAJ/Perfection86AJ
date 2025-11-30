@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>RESTAURĀCIJA - Perfection 86</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="./headerologpng.png">
+  <style>
+    :root {
+      --lightning-red: #FF0000;
+      --racing-red: #CC0000;
+      --accent: #FF0000;
+      --racing-yellow: #FFFFFF;
+      --racing-white: #FFFFFF;
+      --racing-black: #000000;
+      --racing-gray: #1a1a1a;
+      --white: #FFFFFF;
+      --overlay-dark: rgba(0, 0, 0, 0.5);
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 30%, rgba(0, 0, 0, 0.05) 60%, transparent 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    body::after {
+      background: linear-gradient(to left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 30%, rgba(0, 0, 0, 0.05) 60%, transparent 100%);
+    }
+    
+    body::before {
+      left: 0;
+    }
+    
+    body::after {
+      right: 0;
+    }
+    
+    /* Header Styles */
+    .hero-header-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px 0;
+    }
+    
+    .hero-header-nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    
+    .hero-header-logo {
+      height: 50px;
+      width: auto;
+    }
+    
+    .hero-header-nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      margin: 0 15px;
+    }
+    
+    .hero-header-nav a:hover {
+      color: var(--lightning-red);
+    }
+    
+    /* Mobile Header */
+    .hero-mobile-logo {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      height: 40px;
+      z-index: 1001;
+    }
+    
+    .hero-mobile-menu-btn {
+      display: none;
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: rgba(26, 26, 26, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      font-size: 24px;
+      padding: 8px 15px;
+      cursor: pointer;
+      z-index: 1001;
+      border-radius: 5px;
+    }
+    
+    .hero-mobile-dropdown {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      padding: 20px;
+      flex-direction: column;
+    }
+    
+    .hero-mobile-dropdown a {
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .hero-mobile-dropdown a:hover {
+      color: var(--lightning-red);
+    }
+    
+    /* Hero Section */
+    .restoration-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      padding: 120px 20px 80px;
+      margin-top: 70px;
+      overflow: hidden;
+    }
+    
+    .restoration-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('./hero2.jpg') center/cover no-repeat;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .restoration-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .restoration-hero-text {
+      text-align: left;
+    }
+    
+    .restoration-hero-form {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .restoration-hero h1 {
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff, var(--lightning-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+    
+    .restoration-hero p {
+      font-size: 1.3rem;
+      color: #cccccc;
+      line-height: 1.8;
+      max-width: 100%;
+    }
+    
+    /* Contact Form */
+    .contact-form-container {
+      background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .contact-form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: scanline 3s linear infinite;
+    }
+    
+    .contact-form-title {
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      color: #ffffff;
+      text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(255, 255, 255, 0.1);
+    }
+    
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .form-group label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      background: #1a1a1a;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 15px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: 'Inter', Arial, sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--lightning-red);
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    }
+    
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #888;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .form-submit-btn {
+      padding: 15px 40px;
+      background: linear-gradient(135deg, var(--lightning-red), #cc0000);
+      border: none;
+      border-radius: 30px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+      margin-top: 10px;
+    }
+    
+    .form-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+    }
+    
+    /* Main Content */
+    .restoration-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Process Steps - Template Style */
+    .process-section {
+      margin-bottom: 0;
+    }
+    
+    .section-title {
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      position: relative;
+    }
+    
+    .tm-section-2-inner,
+    .tm-section-3-inner {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 60px;
+    }
+    
+    .tm-section-2-left {
+      display: flex;
+      width: 50%;
+      min-height: 560px;
+      -webkit-clip-path: polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%);
+      clip-path: polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%);
+    }
+    
+    .tm-bg-primary {
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(255, 0, 0, 0.05));
+    }
+    
+    .tm-section-2-right {
+      padding: 70px 80px 40px;
+      width: 50%;
+      margin-left: -40px;
+      -webkit-clip-path: polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%);
+      clip-path: polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%);
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(255, 0, 0, 0.05));
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+    
+    .tm-section-2-right::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: scanline 3s linear infinite;
+    }
+    
+    .tm-img-container {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(20%) contrast(1.1);
+      transition: all 0.5s ease;
+    }
+    
+    .tm-section-2-left:hover .tm-img-container {
+      filter: grayscale(0%) contrast(1.2);
+    }
+    
+    .tm-img-container-1 {
+      background-image: url('./hes.webp');
+    }
+    
+    .tm-img-container-2 {
+      background-image: url('./hes.webp');
+    }
+    
+    .tm-section-2-header {
+      font-family: 'Orbitron', 'Bebas Neue', monospace;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ffffff, var(--lightning-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .tm-section-2-text p {
+      font-size: 1.1rem;
+      color: #cccccc;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    
+    .tm-p-ml {
+      margin-left: 0;
+    }
+    
+    .tm-section-3 {
+      min-height: 560px;
+    }
+    
+    .tm-section-3-left {
+      padding: 70px 80px 80px 100px;
+      width: 50%;
+      -webkit-clip-path: polygon(0 0, 86% 0, 100% 100%, 14% 100%);
+      clip-path: polygon(0 0, 86% 0, 100% 100%, 14% 100%);
+      min-height: 560px;
+      background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(255, 0, 0, 0.05));
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .tm-section-3-left::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: scanline 3s linear infinite;
+    }
+    
+    .tm-section-3-right {
+      width: 50%;
+      height: 560px;
+      -webkit-clip-path: polygon(0 0, 86% 0, 100% 100%, 14% 100%);
+      clip-path: polygon(0 0, 86% 0, 100% 100%, 14% 100%);
+      margin-left: -40px;
+    }
+    
+    .tm-img-container-3 {
+      background-image: url('./3.jpg');
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(20%) contrast(1.1);
+      transition: all 0.5s ease;
+    }
+    
+    .tm-section-3-right:hover .tm-img-container-3 {
+      filter: grayscale(0%) contrast(1.2);
+    }
+    
+    .tm-section-3-text {
+      text-align: center;
+      width: 100%;
+    }
+    
+    .tm-section-3-header {
+      font-family: 'Orbitron', 'Bebas Neue', monospace;
+      font-size: 2.5rem;
+      margin-bottom: 35px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ffffff, var(--lightning-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .tm-section-3-text p {
+      font-size: 1.1rem;
+      color: #cccccc;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+    
+    .tm-welcome-icon {
+      font-size: 5rem;
+      color: var(--lightning-red);
+      margin-bottom: 30px;
+      filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+    }
+    
+    @keyframes scanline {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(500px); }
+    }
+    
+    /* Pricing Section */
+    .pricing-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      margin-top: -20px;
+    }
+    
+    .pricing-intro {
+      font-size: 1.1rem;
+      color: #cccccc;
+      line-height: 1.8;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    
+    /* 3D Carousel Container for Pricing */
+    .pricing-carousel-container {
+      width: 100%;
+      max-width: 1800px;
+      height: 650px;
+      perspective: 1400px;
+      position: relative;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin: -40px auto -200px;
+      transform: translateX(-35px);
+    }
+    
+    .pricing-carousel {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+    
+    .pricing-item {
+      position: absolute;
+      width: 450px;
+      height: 550px;
+      left: 50%;
+      top: 50%;
+      transform-style: preserve-3d;
+      transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+      cursor: pointer;
+      transform-origin: center center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .pricing-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: scanline 3s linear infinite;
+    }
+    
+    
+    .pricing-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .pricing-icon-container i {
+      font-size: 80px;
+      color: var(--lightning-red);
+      filter: grayscale(50%) contrast(1.2);
+      transition: all 0.5s ease;
+    }
+    
+    .pricing-item:hover .pricing-icon-container i {
+      filter: grayscale(0%) contrast(1.3);
+      transform: scale(1.1);
+    }
+    
+    .pricing-item h3 {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 20px 0 15px 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ffffff, var(--lightning-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+    
+    .pricing-item p {
+      color: #b0b0b0;
+      line-height: 1.6;
+      margin: 0;
+      font-size: 14px;
+      text-align: center;
+    }
+    
+    .pricing-btn {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, var(--lightning-red), #cc0000);
+      border: none;
+      border-radius: 30px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .pricing-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+    }
+    
+    /* Carousel Controls for Pricing */
+    .pricing-carousel-controls {
+      position: absolute;
+      bottom: -130px;
+      left: 50%;
+      transform: translateX(-20%);
+      display: flex;
+      gap: 20px;
+      z-index: 100;
+    }
+    
+    .pricing-carousel-btn {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #242424, #1a1a1a);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    .pricing-carousel-btn:hover {
+      border-color: var(--lightning-red);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+    
+    /* Restoration Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+    
+    .service-item {
+      background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+      border-radius: 15px;
+      padding: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .service-item:hover {
+      border-color: var(--lightning-red);
+      transform: translateY(-5px);
+    }
+    
+    .service-item i {
+      font-size: 48px;
+      color: var(--lightning-red);
+      margin-bottom: 20px;
+    }
+    
+    .service-item h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Footer */
+    .footer {
+      background: #0a0a0a;
+      padding: 60px 40px 30px;
+      margin-top: 100px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 50px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-section h3 {
+      font-family: 'Orbitron', 'Bebas Neue', monospace;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--lightning-red);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .footer-section h4 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .footer-text {
+      color: #cccccc;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo {
+      max-width: 200px;
+      height: auto;
+      margin-top: 20px;
+    }
+    
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .footer-contact-item {
+      color: #cccccc;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .footer-contact-item i {
+      color: var(--lightning-red);
+      width: 20px;
+    }
+    
+    .footer-contact-item a {
+      color: #cccccc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-contact-item a:hover {
+      color: var(--lightning-red);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #888;
+      font-size: 14px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-header-nav {
+        display: none;
+      }
+      
+      .hero-mobile-logo,
+      .hero-mobile-menu-btn {
+        display: block;
+      }
+      
+      .restoration-hero {
+        padding: 100px 20px 60px;
+        min-height: 50vh;
+      }
+      
+      .restoration-hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .restoration-hero-text {
+        text-align: center;
+      }
+      
+      .restoration-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .restoration-hero p {
+        font-size: 1.1rem;
+      }
+      
+      .contact-form-container {
+        padding: 30px 25px;
+      }
+      
+      .contact-form-title {
+        font-size: 1.5rem;
+      }
+      
+      .restoration-container {
+        padding: 60px 20px;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .tm-section-2-inner,
+      .tm-section-3-inner {
+        flex-direction: column;
+        margin-left: 0;
+      }
+      
+      .tm-section-2-left {
+        width: 100%;
+        height: 400px;
+        margin-left: 0;
+        -webkit-clip-path: none;
+        clip-path: none;
+        flex-direction: column;
+      }
+      
+      .tm-section-2-right {
+        width: 100%;
+        margin-top: 40px;
+        margin-left: 0;
+        padding: 50px 40px;
+        -webkit-clip-path: none;
+        clip-path: none;
+      }
+      
+      .tm-section-3-inner {
+        flex-direction: column-reverse;
+      }
+      
+      .tm-section-3-left {
+        width: 100%;
+        margin-left: 0;
+        padding: 50px 40px;
+        -webkit-clip-path: none;
+        clip-path: none;
+      }
+      
+      .tm-section-3-right {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 40px;
+        margin-left: 0;
+        -webkit-clip-path: none;
+        clip-path: none;
+      }
+      
+      .tm-section-2-header,
+      .tm-section-3-header {
+        font-size: 2rem;
+      }
+      
+      .pricing-criteria {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .pricing-item {
+        padding: 20px;
+      }
+      
+      .pricing-icon-container i {
+        font-size: 60px;
+      }
+      
+      .pricing-item h3 {
+        font-size: 20px;
+        margin: 15px 0 12px 0;
+      }
+      
+      .pricing-item p {
+        font-size: 13px;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer {
+        padding: 40px 20px 20px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .restoration-hero h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+      }
+      
+      .restoration-hero p {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .process-number {
+        font-size: 48px;
+        top: 15px;
+        right: 20px;
+      }
+      
+      .process-card {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="hero-header-overlay" id="hero-header-overlay">
+    <nav class="hero-header-nav">
+      <div class="logo-placeholder">
+        <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-header-logo">
+      </div>
+      <a href="./index.html">SĀKUMS</a>
+      <a href="./index.html#services">PAKALPOJUMI</a>
+      <a href="./index.html#about">PAR MUMS</a>
+      <a href="./index.html#contact">KONTAKTI</a>
+    </nav>
+  </div>
+
+  <!-- Mobile Logo and Menu -->
+  <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
+  <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+  <div class="hero-mobile-dropdown" id="hero-mobile-dropdown">
+    <a href="./index.html">Sākums</a>
+    <a href="./index.html#services">Pakalpojumi</a>
+    <a href="./index.html#about">Par mums</a>
+    <a href="./index.html#contact">Kontakti</a>
+  </div>
+
+  <!-- Hero Section -->
+    <section class="restoration-hero">
+      <div class="restoration-hero-content">
+        <div class="restoration-hero-text">
+          <h1>RESTAURĀCIJA</h1>
+          <p>Perfection 86 darbnīca nodarbojas ar profesionālu auto restaurāciju no A līdz Z! Ja Tavā īpašumā ir kāds sens vai īpašs auto, kuru skāris "laika zobs", bet vēlies tam dot otro dzīvību – mēs Tev palīdzēsim. Esam restaurējuši tādus ikoniskus auto kā Wandarer W23, Nissan Skyline R34, Toyota Supra, BMW E30, Toyota AE86 un daudz citu.</p>
+        </div>
+        <div class="restoration-hero-form">
+          <div class="contact-form-container">
+            <h2 class="contact-form-title">Sazinieties ar mums</h2>
+            <form class="contact-form" id="restorationContactForm">
+              <div class="form-group">
+                <label for="contactName">Vārds</label>
+                <input type="text" id="contactName" name="name" placeholder="Jūsu vārds" required>
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">E-pasts</label>
+                <input type="email" id="contactEmail" name="email" placeholder="jūsu@epasts.lv" required>
+              </div>
+              <div class="form-group">
+                <label for="contactPhone">Tālrunis</label>
+                <input type="tel" id="contactPhone" name="phone" placeholder="+371 2X XXX XXX">
+              </div>
+              <div class="form-group">
+                <label for="contactMessage">Ziņojums</label>
+                <textarea id="contactMessage" name="message" placeholder="Pastāstiet mums par savu projektu..." required></textarea>
+              </div>
+              <button type="submit" class="form-submit-btn">Nosūtīt</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Main Content -->
+  <div class="restoration-container">
+    <!-- Restoration Process - Let's get social! Style -->
+    <section class="process-section">
+      <div class="tm-section-2-inner">
+        <div class="tm-section-2-left">
+          <div class="tm-img-container tm-img-container-1"></div>
+        </div>
+        <div class="tm-section-2-right tm-bg-primary">
+          <div class="tm-section-2-text">
+            <p><strong>Iepazīšanās</strong></p>
+            <p>Restaurācija sākas ar iepazīšanos ar auto un tā sākotnējo novērtējumu. Tiek apkopota informācija, fotogrāfijas un iespējamie defekti, lai sagatavotu provizorisku darba plānu un izmaksu aprēķinu.</p>
+            <p class="tm-p-ml"><strong>Izjaukšana, projekta novērtēšana, cenas sastādīšana</strong></p>
+            <p>Kad auto nonāk darbnīcā, tas tiek pilnībā izjaukts, lai precīzi novērtētu katras detaļas stāvokli. Pēc pārbaudes tiek izveidots nepieciešamo rezerves daļu saraksts un sastādīta galīgā tāme, kas tiek saskaņota ar īpašnieku.</p>
+            <p><strong>Virsbūves atjaunošana</strong></p>
+            <p>Tālāk sākas virsbūves darbi — bojātās vietas tiek sametinātas, šuves apstrādātas, virsma gruntēta un špaktelēta. Oriģinālās detaļas tiek hromētas vai cinkotas, un virsbūve tiek sagatavota kvalitatīvai krāsošanai.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Opportunities Section -->
+    <section class="process-section tm-section-3">
+      <div class="tm-section-3-inner">
+        <div class="tm-section-3-left tm-bg-primary">
+          <div class="tm-section-3-text">
+            <p><strong>4. Krāsošana</strong></p>
+            <p>Pirms krāsošanas virsma tiek rūpīgi nomazgāta un nožāvēta. Tiek izvēlēta piemērotākā krāsa un uzklāšanas metode. Krāsa tiek klāta vairākās kārtās un pārsegta ar laku, pēc tam auto nepieciešamības gadījumā nopulē.</p>
+            <p><strong>5. Dzinēja un saistīto agregātu remonts</strong></p>
+            <p>Dzinējs tiek izjaukts, defektēts un komplektēts ar jaunām vai atjaunotām detaļām, pārbaudot bloku un galvu. Mehāniķis arī atjauno šasiju un ritošo daļu, nodrošinot auto tehnisko pilnvērtību.</p>
+          </div>
+        </div>
+        <div class="tm-section-3-right">
+          <div class="tm-img-container tm-img-container-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Let's get social! Section - Copy -->
+    <section class="process-section">
+      <div class="tm-section-2-inner">
+        <div class="tm-section-2-left">
+          <div class="tm-img-container tm-img-container-1"></div>
+        </div>
+        <div class="tm-section-2-right tm-bg-primary">
+          <div class="tm-section-2-text">
+            <p><strong>6. Salona atjaunošana</strong></p>
+            <p>Salona restaurāciju veic sadarbības speciālisti. Bojātās vai visas salona daļas tiek noņemtas un nogādātas meistaram kvalitatīvai atjaunošanai.</p>
+            <p class="tm-p-ml"><strong>7. Salikšana</strong></p>
+            <p>Noslēgumā auto tiek salikts kopā: uzstāda atjaunotās un jaunās detaļas, iemontē dzinēju un salonu. Šis posms prasa lielu pieredzi un precizitāti.</p>
+            <p><strong>8. Sagatavošana nodošanai klientam</strong></p>
+            <p>Pirms nodošanas tiek pārbaudītas visas sistēmas, lai pārliecinātos par auto drošību un kvalitāti. Nobeigumā salons tiek iztīrīts un virsbūve nomazgāta, sagatavojot auto prezentēšanai klientam.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="process-section">
+      <h2 class="section-title">Kā tiek noteikta auto restaurācijas cena?</h2>
+      <div class="pricing-content">
+        <div class="pricing-carousel-container">
+          <div class="pricing-carousel" id="pricingCarousel">
+            <div class="pricing-item">
+              <div class="pricing-icon-container">
+                <i class="fas fa-car-side"></i>
+              </div>
+              <h3>Automašīnas virsbūves stāvoklis</h3>
+              <p>Virsbūves stāvoklis ir viens no galvenajiem faktoriem, kas ietekmē restaurācijas izmaksas. Rūsu apjoms, bojājumi un nepieciešamā remonta darbu apjoms nosaka galīgo cenu.</p>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-icon-container">
+                <i class="fas fa-cog"></i>
+              </div>
+              <h3>Dzinēja stāvoklis</h3>
+              <p>Dzinēja tehniskais stāvoklis un nepieciešamais remonta apjoms būtiski ietekmē projekta izmaksas. Kapitālais remonts vai detaļu nomaiņa prasa papildu investīcijas.</p>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-icon-container">
+                <i class="fas fa-wrench"></i>
+              </div>
+              <h3>Ritošās daļas stāvoklis</h3>
+              <p>Ritošās daļas, bremžu sistēma un citi mehāniskie komponenti prasa rūpīgu novērtējumu un bieži vien papildu remontdarbus.</p>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-icon-container">
+                <i class="fas fa-chair"></i>
+              </div>
+              <h3>Salona stāvoklis</h3>
+              <p>Interjera restaurācija, sēdekļu atjaunošana un detaļu nomaiņa var būt nozīmīga izmaksu sastāvdaļa atkarībā no salona stāvokļa.</p>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-icon-container">
+                <i class="fas fa-box"></i>
+              </div>
+              <h3>Rezerves daļu pieejamība</h3>
+              <p>Oriģinālo vai augstas kvalitātes aizvietotājdaļu pieejamība un cenas būtiski ietekmē projekta kopējās izmaksas.</p>
+            </div>
+            <div class="pricing-item">
+              <div class="pricing-icon-container">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <h3>Klienta individuālas vēlmes</h3>
+              <p>Papildu uzlabojumi, modernizācija vai īpašas prasības var palielināt projekta izmaksas atbilstoši klienta vēlmēm.</p>
+            </div>
+            <div class="pricing-item pricing-item-other">
+              <div class="pricing-icon-container">
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
+              <h3>…un dažādi citi faktori</h3>
+              <p>Daudzi citi faktori, piemēram, auto vecums, retums, darba sarežģītība un termiņi, var ietekmēt galīgo cenu.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>PERFECTION 86</h3>
+          <p class="footer-text">Mašīnu restaurācijas un pārkrāsošanas pakalpojumi</p>
+          <img src="./perfection86.webp" alt="Perfection 86 Logo" class="footer-logo">
+        </div>
+        <div class="footer-section">
+          <h4>KONTAKTI</h4>
+          <div class="footer-contact">
+            <p class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Kungu iela 87a, Liepāja, LV-3401</span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <a href="tel:+37124987686">+371 24 987 686</a>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:sveilisaivis@gmail.com">sveilisaivis@gmail.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Perfection 86. Visas tiesības aizsargātas.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('hero-mobile-menu-btn');
+    const mobileDropdown = document.getElementById('hero-mobile-dropdown');
+    
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', function() {
+        if (mobileDropdown.style.display === 'flex') {
+          mobileDropdown.style.display = 'none';
+        } else {
+          mobileDropdown.style.display = 'flex';
+        }
+      });
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (mobileDropdown && mobileMenuBtn) {
+        if (!mobileDropdown.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+          mobileDropdown.style.display = 'none';
+        }
+      }
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+            if (mobileDropdown) {
+              mobileDropdown.style.display = 'none';
+            }
+          }
+        }
+      });
+    });
+    
+    // Pricing Carousel Functionality
+    const pricingCarousel = document.getElementById('pricingCarousel');
+    let pricingCurrentIndex = 0;
+    const pricingItems = pricingCarousel ? pricingCarousel.querySelectorAll('.pricing-item') : [];
+    
+    function updatePricingCarousel() {
+      if (!pricingCarousel || pricingItems.length === 0) return;
+      
+      const totalItems = pricingItems.length;
+      const isMobile = window.innerWidth <= 768;
+      const isTablet = window.innerWidth <= 1024;
+      
+      pricingItems.forEach((item, index) => {
+        let offset = index - pricingCurrentIndex;
+        
+        if (offset > totalItems / 2) {
+          offset -= totalItems;
+        } else if (offset < -totalItems / 2) {
+          offset += totalItems;
+        }
+        
+        const absOffset = Math.abs(offset);
+        const sign = offset < 0 ? -1 : 1;
+        
+        item.style.transform = '';
+        item.style.opacity = '';
+        item.style.zIndex = '';
+        item.style.transition = 'all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1)';
+        
+        let spacing1 = 480;
+        let spacing2 = 720;
+        let spacing3 = 900;
+        
+        if (isMobile) {
+          spacing1 = 280;
+          spacing2 = 420;
+          spacing3 = 550;
+        } else if (isTablet) {
+          spacing1 = 400;
+          spacing2 = 600;
+          spacing3 = 750;
+        }
+        
+        if (absOffset === 0) {
+          item.style.transform = 'translate(-50%, -50%) translateZ(0) scale(1)';
+          item.style.opacity = '1';
+          item.style.zIndex = '10';
+        } else if (absOffset === 1) {
+          const translateX = sign * spacing1;
+          const rotation = isMobile ? 25 : 30;
+          const scale = isMobile ? 0.88 : 0.85;
+          item.style.transform = `translate(-50%, -50%) translateX(${translateX}px) translateZ(-200px) rotateY(${-sign * rotation}deg) scale(${scale})`;
+          item.style.opacity = '0.8';
+          item.style.zIndex = '5';
+        } else if (absOffset === 2) {
+          const translateX = sign * spacing2;
+          const rotation = isMobile ? 35 : 40;
+          const scale = isMobile ? 0.75 : 0.7;
+          item.style.transform = `translate(-50%, -50%) translateX(${translateX}px) translateZ(-350px) rotateY(${-sign * rotation}deg) scale(${scale})`;
+          item.style.opacity = '0.5';
+          item.style.zIndex = '3';
+        } else if (absOffset === 3) {
+          const translateX = sign * spacing3;
+          const rotation = isMobile ? 40 : 45;
+          const scale = isMobile ? 0.65 : 0.6;
+          item.style.transform = `translate(-50%, -50%) translateX(${translateX}px) translateZ(-450px) rotateY(${-sign * rotation}deg) scale(${scale})`;
+          item.style.opacity = '0.3';
+          item.style.zIndex = '2';
+        } else {
+          item.style.transform = 'translate(-50%, -50%) translateZ(-500px) scale(0.5)';
+          item.style.opacity = '0';
+          item.style.zIndex = '1';
+        }
+      });
+    }
+    
+    function pricingNextSlide() {
+      if (pricingItems.length === 0) return;
+      pricingCurrentIndex = (pricingCurrentIndex + 1) % pricingItems.length;
+      updatePricingCarousel();
+    }
+    
+    function pricingPrevSlide() {
+      if (pricingItems.length === 0) return;
+      pricingCurrentIndex = (pricingCurrentIndex - 1 + pricingItems.length) % pricingItems.length;
+      updatePricingCarousel();
+    }
+    
+    // Initialize pricing carousel
+    if (pricingCarousel && pricingItems.length > 0) {
+      updatePricingCarousel();
+      
+      // Auto-rotate pricing carousel
+      setInterval(pricingNextSlide, 5000);
+      
+      // Handle window resize
+      window.addEventListener('resize', updatePricingCarousel);
+    }
+    
+    // Contact Form Handling
+    const restorationContactForm = document.getElementById('restorationContactForm');
+    if (restorationContactForm) {
+      restorationContactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const formData = {
+          name: document.getElementById('contactName').value,
+          email: document.getElementById('contactEmail').value,
+          phone: document.getElementById('contactPhone').value,
+          message: document.getElementById('contactMessage').value
+        };
+        
+        // Here you would typically send the data to a server
+        // For now, we'll just show an alert
+        alert('Paldies! Jūsu ziņojums ir saņemts. Mēs ar jums sazināsimies tuvākajā laikā.');
+        
+        // Reset form
+        restorationContactForm.reset();
+      });
+    }
+  </script>
+</body>
+</html>
+

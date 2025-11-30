@@ -1,0 +1,2973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Perfection 86</title>
+  <link rel="icon" type="image/png" href="./headerologpng.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Russo+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --lightning-red: #FF0000;
+      --racing-red: #CC0000;
+      --accent: #FF0000;
+      --racing-yellow: #FFFFFF;
+      --racing-white: #FFFFFF;
+      --racing-black: #000000;
+      --racing-gray: #1a1a1a;
+      --white: #FFFFFF;
+      --overlay-dark: rgba(0, 0, 0, 0.5);
+      --overlay-gradient: linear-gradient(180deg, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.7) 100%);
+      --headline-size: 3.5rem;
+      --subheadline-size: 1.35rem;
+      --button-radius: 999px;
+      --button-padding: 0.9em 2.2em;
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+    }
+    
+    
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    body.loading {
+      overflow: hidden;
+    }
+    
+    /* Loading Screen */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    
+    .loading-logo {
+      width: auto;
+      height: 120px;
+      max-width: 400px;
+      margin-bottom: 50px;
+      filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+      animation: logoPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes logoPulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+        transform: scale(1);
+      }
+      50% {
+        filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8));
+        transform: scale(1.02);
+      }
+    }
+    
+    .loading-progress-container {
+      width: 300px;
+      max-width: 90%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .loading-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--lightning-red) 0%, #ff3333 50%, var(--lightning-red) 100%);
+      background-size: 200% 100%;
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), 0 0 40px rgba(255, 0, 0, 0.3);
+      animation: progressShimmer 2s linear infinite;
+    }
+    
+    @keyframes progressShimmer {
+      0% {
+        background-position: 0% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+    
+    .loading-percentage {
+      margin-top: 20px;
+      color: #ffffff;
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    
+    @media (max-width: 768px) {
+      .loading-logo {
+        height: 80px;
+        max-width: 250px;
+        margin-bottom: 40px;
+      }
+      
+      .loading-progress-container {
+        width: 250px;
+      }
+      
+      .loading-percentage {
+        font-size: 1rem;
+      }
+    }
+    
+    /* Hero Header Overlay - Transparent at top */
+    .hero-header-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 300;
+      background: rgba(26,26,26,0);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      height: 72px;
+      pointer-events: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .hero-header-overlay.visible {
+      background: #1a1a1a;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+    
+    .hero-header-overlay .hero-header-logo {
+      margin-left: 96px;
+      margin-top: 8px;
+      height: 80px;
+      width: auto;
+      max-width: 300px;
+      display: block;
+      transition: height 0.3s, max-width 0.3s;
+      position: relative;
+      filter: brightness(0) invert(1);
+    }
+    
+    .hero-header-overlay.visible .hero-header-logo {
+      filter: brightness(0) invert(1);
+    }
+    
+    .hero-header-overlay .hero-header-logo-nav {
+      display: none;
+    }
+    
+    .hero-header-nav {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      margin-right: 16px;
+    }
+    
+    .hero-header-nav a {
+      color: #fff;
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 1.15rem;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.3em 0.8em;
+      border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.32);
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .hero-header-nav a:hover, .hero-header-nav a:focus {
+      background: none;
+      color: #fff;
+      outline: none;
+    }
+    
+    .hero-header-overlay.visible .hero-header-nav a {
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.32);
+    }
+    
+    .hero-header-overlay.visible .hero-header-nav a:hover {
+      color: var(--lightning-red);
+      background: none;
+    }
+    
+    .logo-placeholder {
+      width: 300px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.32);
+    }
+    
+    .logo-placeholder img {
+      width: auto;
+      height: 100%;
+      max-width: 150px;
+      max-height: 40px;
+      display: block;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s;
+    }
+    
+    .hero-header-overlay.visible .logo-placeholder img {
+      filter: brightness(0) invert(1);
+    }
+    
+    .hero-header-overlay.visible .logo-placeholder {
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.32);
+    }
+    
+    /* Mobile Logo and Menu Button */
+    .hero-mobile-logo {
+      position: absolute;
+      top: 7.5px;
+      left: 18px;
+      z-index: 10;
+      height: 65px;
+      width: auto;
+      max-width: 205px;
+      display: block;
+      filter: brightness(0) invert(1);
+      object-fit: contain;
+    }
+    
+    .hero-mobile-menu-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 10;
+      height: 38px;
+      width: 38px;
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .hero-mobile-menu-btn:active,
+    .hero-mobile-menu-btn.open {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    
+    .hero-mobile-dropdown {
+      display: none;
+      position: absolute;
+      top: 62px;
+      right: 18px;
+      z-index: 20;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(34,34,34,0.13);
+      padding: 0.7rem 0.5rem;
+      min-width: 140px;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .hero-mobile-dropdown.open {
+      display: flex;
+    }
+    
+    .hero-mobile-dropdown a {
+      color: #222;
+      text-decoration: none;
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 0.4em 0.7em;
+      border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+      display: block;
+      background: transparent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .hero-mobile-dropdown a:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      -webkit-playsinline: true;
+      -moz-playsinline: true;
+      -ms-playsinline: true;
+      playsinline: true;
+      -webkit-playsinline: true;
+    }
+    
+    @media (max-width: 900px) {
+      .hero-video {
+        object-fit: cover;
+        -webkit-playsinline: true;
+        -moz-playsinline: true;
+        -ms-playsinline: true;
+        playsinline: true;
+      }
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--overlay-gradient);
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      margin-top: -150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--transition), transform 0.8s var(--transition);
+    }
+    
+    .hero-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hero-headline {
+      font-family: 'Merriweather', 'Georgia', serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      font-size: var(--headline-size);
+      text-align: center;
+      text-shadow: 0 4px 32px rgba(34,34,34,0.32), 0 0 0.5em var(--accent);
+      margin-bottom: 1.1rem;
+      line-height: 1.08;
+    }
+    
+    .hero-headline img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 4px 32px rgba(34,34,34,0.32)) drop-shadow(0 0 0.5em var(--accent));
+      max-height: 480px;
+      width: auto;
+    }
+    
+    .hero-subheadline {
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--white);
+      font-size: var(--subheadline-size);
+      font-weight: 400;
+      text-align: center;
+      margin-top: 0.5rem;
+      margin-bottom: 2.2rem;
+      letter-spacing: 0.2px;
+      text-shadow: 0 2px 12px rgba(34,34,34,0.22);
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .hero-btn {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: var(--button-radius);
+      padding: var(--button-padding);
+      border: 2px solid var(--accent);
+      outline: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition);
+      box-shadow: 0 2px 16px rgba(34,34,34,0.10);
+      margin-bottom: 0.5rem;
+    }
+    
+    .hero-btn.primary {
+      background: var(--lightning-red);
+      color: #fff;
+      border: 2px solid var(--lightning-red);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-btn.primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+    
+    .hero-btn.primary:hover::before {
+      left: 100%;
+    }
+    
+    .hero-btn.secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid var(--racing-white);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+    
+    .hero-btn.primary:hover, .hero-btn.primary:focus {
+      background: var(--racing-red);
+      color: #fff;
+      border: 2px solid var(--racing-white);
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.8), 0 0 50px rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+    }
+    
+    .hero-btn.secondary:hover, .hero-btn.secondary:focus {
+      background: var(--racing-white);
+      color: var(--racing-black);
+      border: 2px solid var(--racing-white);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+      transform: scale(1.05);
+    }
+    
+    /* Racing Checkered Pattern */
+    .checkered-pattern {
+      background-image: 
+        linear-gradient(45deg, #000 25%, transparent 25%),
+        linear-gradient(-45deg, #000 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #000 75%),
+        linear-gradient(-45deg, transparent 75%, #000 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      opacity: 0.1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    /* Projects Showcase Section */
+    .services-section {
+      padding: 20px 0 100px 0;
+      background: #1a1a1a;
+      position: relative;
+      overflow: hidden;
+      margin-top: -80px;
+      z-index: 100;
+      min-height: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    
+    .services-section .section-title {
+      text-align: center;
+      margin-bottom: -30px;
+      position: relative;
+      z-index: 10;
+      text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(255, 255, 255, 0.1);
+      letter-spacing: 3px;
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    
+    /* 3D Carousel Container */
+    .carousel-container {
+      width: 100%;
+      max-width: 1800px;
+      height: 650px;
+      perspective: 1400px;
+      position: relative;
+      padding-top: 0;
+      margin: 0 auto;
+      transform: translateX(-35px);
+      margin-top: -20px;
+    }
+    
+    .carousel {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+    
+    .carousel-item {
+      position: absolute;
+      width: 450px;
+      height: 550px;
+      left: 50%;
+      top: 50%;
+      transform-style: preserve-3d;
+      transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+      cursor: pointer;
+      transform-origin: center center;
+    }
+    
+    .service-card {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: scanline 3s linear infinite;
+    }
+    
+    @keyframes scanline {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(500px); }
+    }
+    
+    .card-number {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 72px;
+      font-weight: 900;
+      color: rgba(255, 0, 0, 0.1);
+      font-family: 'Orbitron', 'Bebas Neue', monospace;
+    }
+    
+    .card-badge {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--lightning-red) 0%, #cc0000 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.1);
+      border: 2px solid #ffffff;
+      overflow: hidden;
+      top: -20px;
+      left: -20px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-badge img {
+      border-radius: 50%;
+    }
+    
+    .card-badge img {
+      width: 45px;
+      height: auto;
+      filter: brightness(0) invert(1);
+    }
+    
+    .carousel-item:hover .service-card {
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 25px 50px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    
+    .service-image {
+      width: 100%;
+      height: 200px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      margin-bottom: 0;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .service-image img,
+    .service-image .slide {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(50%) contrast(1.2);
+      transition: all 0.5s ease;
+    }
+    
+    .carousel-item:hover .service-image img,
+    .carousel-item:hover .service-image .slide.active {
+      filter: grayscale(0%) contrast(1.3);
+      transform: scale(1.1);
+    }
+    
+    /* Image Slider Styles */
+    .image-slider {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .image-slider .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      object-fit: cover;
+    }
+    
+    .image-slider .slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    
+    .service-card:hover .image-slider .slide.active {
+      transform: scale(1.05);
+    }
+    
+    .slider-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    
+    .slider-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .slider-dots .dot.active {
+      background: var(--lightning-red);
+      border-color: var(--lightning-red);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+    }
+    
+    .slider-dots .dot:hover {
+      background: var(--lightning-red);
+      border-color: var(--lightning-red);
+      transform: scale(1.2);
+    }
+    
+    .service-content {
+      padding: 20px 32px 32px 32px;
+      text-align: left;
+      position: relative;
+      z-index: 2;
+      border-radius: 0 0 23px 23px;
+      background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+      margin-top: -10px;
+    }
+    
+    .service-content h3 {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ffffff, var(--lightning-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .service-content p {
+      color: #b0b0b0;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .project-tag {
+      padding: 5px 12px;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid var(--lightning-red);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--lightning-red);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .service-btn {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, var(--lightning-red), #cc0000);
+      border: none;
+      border-radius: 30px;
+      color: #ffffff;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .service-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+    }
+    
+    /* Carousel Controls */
+    .carousel-controls {
+      position: absolute;
+      bottom: -130px;
+      left: 50%;
+      transform: translateX(-20%);
+      display: flex;
+      gap: 20px;
+      z-index: 100;
+    }
+    
+    .carousel-btn {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #242424, #1a1a1a);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      color: var(--lightning-red);
+      font-size: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .carousel-btn:hover {
+      border-color: var(--lightning-red);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+    
+    
+    /* Services Offered Section */
+    .services-offered-section {
+      padding: 0 0 30px 0;
+      margin-top: -20px;
+      background: #1a1a1a;
+      position: relative;
+      overflow: hidden;
+      z-index: 400;
+    }
+    
+    .services-offered-section::before {
+      display: none;
+    }
+    
+    .services-offered-section .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .services-section-title {
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-align: center;
+      background: #1a1a1a;
+      color: #ffffff;
+      margin-bottom: 4rem;
+      margin-top: -15px;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      position: relative;
+      display: block;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
+      margin-right: 0;
+      padding: 32px 0 16px 0;
+      border-radius: 0;
+      border-top: none;
+      border-bottom: none;
+      border-left: none;
+      border-right: none;
+      box-sizing: border-box;
+      z-index: 450;
+    }
+    
+     .services-offered-grid {
+       display: grid;
+       grid-template-columns: repeat(3, 1fr);
+       gap: 40px;
+       max-width: 1400px;
+       margin: 0 auto;
+     }
+    
+    .service-offered-card {
+      background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+      border-radius: 20px;
+      padding: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .service-offered-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      animation: scanline 3s linear infinite;
+      z-index: 1;
+    }
+    
+    .service-offered-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 25px;
+      position: relative;
+      transition: all 0.4s ease;
+      filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6));
+    }
+    
+    .service-icon-img {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 25px;
+      display: block;
+      object-fit: contain;
+      transition: all 0.4s ease;
+      filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6));
+    }
+    
+    .service-icon-img.motors {
+      width: 240px;
+      height: 240px;
+      margin-bottom: -35px;
+      margin-top: -20px;
+    }
+    
+    .service-icon-img.riepa {
+      width: 240px;
+      height: 240px;
+      margin-bottom: -20px;
+    }
+    
+    .service-offered-card:has(.service-icon-img.riepa) h3 {
+      margin-top: -15px;
+    }
+    
+    .service-icon-img.details {
+      width: 240px;
+      height: 240px;
+      margin-bottom: -20px;
+    }
+    
+    .service-offered-card:has(.service-icon-img.details) h3 {
+      margin-top: -15px;
+    }
+    
+    .service-offered-card:has(.service-icon-img[src="./res3.png"]) {
+      padding-top: 80px;
+    }
+    
+    .service-offered-card:has(.service-icon-img.motors) {
+      padding-top: 20px;
+    }
+    
+    .service-offered-card:has(.service-icon-img.motors) h3 {
+      margin-top: -30px;
+    }
+    
+    .service-icon::before,
+    .service-icon::after {
+      content: '';
+      position: absolute;
+    }
+    
+    /* Towing Truck Icon - Truck with Trailer */
+    .service-icon.towing {
+      border: none;
+      background: transparent;
+    }
+    
+    .service-icon.towing::before {
+      /* Truck cab */
+      width: 22px;
+      height: 18px;
+      background: var(--lightning-red);
+      border: 2px solid var(--lightning-red);
+      top: 20px;
+      left: 10px;
+      border-radius: 3px 2px 2px 3px;
+      box-shadow: 
+        /* Front truck wheel */
+        0 20px 0 -1px var(--lightning-red),
+        /* Back truck wheel */
+        16px 20px 0 -1px var(--lightning-red),
+        /* Tow hitch */
+        20px 9px 0 0 var(--lightning-red);
+    }
+    
+    .service-icon.towing::after {
+      /* Trailer flatbed */
+      width: 30px;
+      height: 14px;
+      background: var(--lightning-red);
+      border: 2px solid var(--lightning-red);
+      top: 21px;
+      left: 36px;
+      border-radius: 2px;
+      box-shadow: 
+        /* Front trailer wheel */
+        4px 19px 0 -1px var(--lightning-red),
+        /* Back trailer wheel */
+        22px 19px 0 -1px var(--lightning-red);
+    }
+    
+    /* Paint Brush Icon - Simple vertical line with rounded top */
+    .service-icon.paint {
+      border: none;
+      background: transparent;
+    }
+    
+    .service-icon.paint::before {
+      width: 4px;
+      height: 45px;
+      background: var(--lightning-red);
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .service-icon.paint::after {
+      width: 32px;
+      height: 12px;
+      background: var(--lightning-red);
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0 0 50% 50%;
+    }
+    
+    /* Gear/Engine Icon - Circle with plus cross */
+    .service-icon.engine {
+      border: 3px solid var(--lightning-red);
+      border-radius: 50%;
+      background: transparent;
+    }
+    
+    .service-icon.engine::before {
+      width: 48px;
+      height: 5px;
+      background: var(--lightning-red);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 2px;
+    }
+    
+    .service-icon.engine::after {
+      width: 5px;
+      height: 48px;
+      background: var(--lightning-red);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 2px;
+    }
+    
+    .service-offered-card:hover .service-icon {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.9));
+    }
+    
+    .service-offered-card:hover .service-icon-img {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 25px rgba(255, 0, 0, 0.9));
+    }
+    
+    .service-offered-card:hover .service-icon.engine {
+      animation: gear-rotate 2s linear infinite;
+    }
+    
+    @keyframes gear-rotate {
+      from { transform: scale(1.15) rotate(0deg); }
+      to { transform: scale(1.15) rotate(360deg); }
+    }
+    
+    .service-offered-card h3 {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #ffffff, var(--lightning-red));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+    
+    .service-offered-card p {
+      font-size: 14px;
+      color: #b0b0b0;
+      line-height: 1.6;
+      text-align: center;
+      font-weight: 400;
+    }
+    
+    .section-title {
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-align: center;
+      background: #1a1a1a;
+      color: #ffffff;
+      margin-bottom: 3rem;
+      margin-top: -20px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 32px 0 16px 0;
+      border-radius: 15px 15px 0 0;
+      text-shadow: 0 2px 4px rgba(42, 42, 42, 0.2), 0 4px 8px rgba(42, 42, 42, 0.15);
+      border-top: none;
+      border-bottom: none;
+      border-left: none;
+      border-right: none;
+      z-index: 350;
+      box-shadow: none;
+      overflow: visible;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Toy Car Animation */
+    .toy-car-container {
+      position: absolute;
+      top: 3%;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 401;
+      transform: translateY(0);
+      margin-top: 0;
+      display: none; /* Hidden for now, can be restored by removing this line */
+    }
+    
+    .toy-car {
+      position: absolute;
+      left: -150px;
+      top: 56%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 401;
+    }
+    
+    .bmw-car-image {
+      width: auto;
+      height: 80px;
+      max-width: 280px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+      display: block;
+    }
+    
+    .toy-car.animate {
+      animation: car-race 5s ease-in-out forwards;
+      opacity: 1;
+    }
+    
+    @keyframes car-race {
+      0% {
+        left: -150px;
+        opacity: 0;
+      }
+      5% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-50%) scale(1.08);
+      }
+      95% {
+        opacity: 1;
+      }
+      100% {
+        left: calc(100% + 150px);
+        transform: translateY(-50%) scale(1);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes digital-shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    
+    @keyframes digital-glow {
+      0% {
+        filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.6)) drop-shadow(0 0 40px rgba(255, 0, 0, 0.4));
+      }
+      100% {
+        filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 60px rgba(255, 0, 0, 0.6));
+      }
+    }
+    
+    
+    
+    /* Footer Styles */
+    .footer {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 50px 20px 40px;
+      margin-top: 0;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+    
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .footer-logo {
+      height: 60px;
+      width: auto;
+      max-width: 200px;
+      margin-top: 20px;
+      margin-left: -35px;
+      filter: brightness(0) invert(1);
+      display: block;
+      object-fit: contain;
+    }
+    
+    .footer-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+    }
+    
+    .footer-text {
+      color: #cccccc;
+      line-height: 1.8;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    
+    .footer-section-title {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffffff;
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+    }
+    
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #cccccc;
+      font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+      line-height: 1.6;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    
+    .footer-contact-item i {
+      font-size: 1.1rem;
+      color: #ffffff;
+      width: 20px;
+      text-align: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    
+    .footer-contact-item a {
+      color: #cccccc;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-contact-item a:hover {
+      color: var(--accent);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cccccc;
+      font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    
+    .footer-bottom p {
+      color: #cccccc;
+      margin: 0;
+    }
+    
+    .footer-creator {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cccccc;
+      font-size: 0.9rem;
+    }
+    
+    .company-name {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .company-name {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    
+    /* Partners Section */
+    .partners-section {
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      padding-top: 10px !important;
+      background: #1a1a1a;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin: 0 !important;
+      margin-top: 0;
+      margin-bottom: 0 !important;
+      line-height: 0;
+    }
+    
+    .partners-container {
+      max-width: 100%;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      position: relative;
+      width: 100%;
+      line-height: 0;
+    }
+    
+    .partners-title {
+      font-family: 'Bebas Neue', 'Russo One', 'Orbitron', Arial, sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      text-align: center;
+      color: #ffffff;
+      margin: 0 !important;
+      margin-top: 15px !important;
+      margin-bottom: 0 !important;
+      padding: 0 20px !important;
+      padding-bottom: 0 !important;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      line-height: 1.2;
+    }
+    
+    .partners-slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+      line-height: 0;
+    }
+    
+    .partners-track {
+      display: flex;
+      gap: 60px;
+      animation: slidePartners 30s linear infinite;
+      width: max-content;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      line-height: 0;
+    }
+    
+    .partners-track:hover {
+      animation-play-state: running;
+    }
+    
+    @keyframes slidePartners {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    .partner-item {
+      flex-shrink: 0;
+      width: 400px;
+      height: auto;
+      min-height: 0;
+      max-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-radius: 0;
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+      transition: all 0.3s ease;
+      border: none;
+      line-height: 0;
+    }
+    
+    .partner-item:hover {
+      background: transparent;
+      border-color: transparent;
+      transform: scale(1.05);
+      box-shadow: none;
+    }
+    
+    .partner-item img {
+      max-width: 100%;
+      max-height: 240px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: brightness(0.9);
+      transition: filter 0.3s ease, transform 0.3s ease;
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      padding-bottom: 0 !important;
+      display: block;
+      vertical-align: bottom;
+      line-height: 0;
+    }
+    
+    .partner-item:hover img {
+      filter: brightness(1.1);
+      transform: scale(1.1);
+    }
+    
+    /* Scroll to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--lightning-red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+      z-index: 999;
+      transition: all 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      font-size: 1.2rem;
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .scroll-top:hover {
+      transform: translateY(-5px);
+      background: var(--racing-red);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.7);
+    }
+    
+    /* Responsive Design */
+    @media (min-width: 901px) {
+      .hero-header-overlay {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        height: 72px;
+        padding: 0 32px;
+        gap: 0;
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: rgba(24,24,24,0.0);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        z-index: 300;
+        display: flex;
+        box-shadow: none;
+        color: #222;
+        transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+      }
+      
+      .hero-header-overlay.visible,
+      .hero-header-overlay.at-end {
+        top: 0;
+      }
+      
+      .logo-placeholder {
+        height: 48px;
+        width: auto;
+        margin: 0 10px 0 0;
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        transform: translateY(-20%);
+      }
+      
+      .logo-placeholder img {
+        height: 48px;
+        max-height: 48px;
+        width: auto;
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s;
+      }
+      
+      .hero-header-overlay.visible .logo-placeholder img {
+        filter: brightness(0) invert(1);
+      }
+      
+      .hero-header-overlay.visible .logo-placeholder {
+        color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.32);
+      }
+      
+      .hero-header-logo-nav {
+        height: 24px;
+        width: auto;
+        margin: 0 10px 0 0;
+        filter: none;
+        display: none;
+        vertical-align: middle;
+        position: relative;
+        transform: translateY(-20%);
+      }
+      
+      .hero-mobile-logo,
+      .hero-mobile-menu-btn,
+      .hero-mobile-dropdown {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .hero-header-nav {
+        display: none !important;
+      }
+      
+      .hero-header-overlay {
+        display: none !important;
+      }
+      
+      .hero-mobile-logo {
+        display: block;
+      }
+      
+      .hero-mobile-menu-btn {
+        display: block;
+      }
+      
+      .toy-car-container {
+        display: none !important;
+      }
+      
+      .toy-car {
+        display: none !important;
+      }
+      
+      .hero {
+        min-height: 70vh;
+        height: 70vh;
+        background-attachment: scroll;
+      }
+      
+      .hero-content {
+        margin: 0 auto;
+        margin-top: -20px;
+        padding: 20px;
+      }
+      
+      .hero-headline {
+        font-size: 2.09rem;
+      }
+      
+      .hero-headline img {
+        max-height: 289px;
+        width: auto;
+      }
+      
+      .hero-subheadline {
+        font-size: 0.95rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        align-items: center;
+      }
+      
+      .hero-btn {
+        width: 100%;
+        max-width: 266px;
+        min-height: 45.6px;
+        font-size: 1rem;
+        border-radius: 999px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 12px 24px !important;
+        line-height: 1;
+        vertical-align: middle;
+        margin-bottom: 0;
+        touch-action: manipulation;
+      }
+      
+      .hero-btn:active {
+        transform: scale(0.97);
+        box-shadow: 0 2px 12px rgba(231,76,60,0.18);
+      }
+      
+      .carousel-container {
+        height: 550px;
+        padding-top: 0;
+        transform: translateX(0);
+        margin: 0 auto;
+      }
+      
+      .carousel-item {
+        width: 300px;
+        height: 460px;
+      }
+      
+      .carousel-item .service-card {
+        padding: 20px;
+      }
+      
+      .service-image {
+        height: 150px;
+        margin-bottom: 0;
+      }
+      
+      .card-number {
+        font-size: 50px;
+        top: 15px;
+        right: 20px;
+      }
+      
+      .service-content h3 {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+      
+      .service-content p {
+        font-size: 13px;
+        margin-bottom: 15px;
+      }
+      
+      .project-tags {
+        margin-bottom: 15px;
+        gap: 6px;
+      }
+      
+      .project-tag {
+        padding: 4px 10px;
+        font-size: 11px;
+      }
+      
+      .service-btn {
+        padding: 10px 25px;
+        font-size: 14px;
+      }
+      
+      .carousel-controls {
+        bottom: -60px;
+        gap: 15px;
+      }
+      
+      .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      
+      .section-title {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+        border-radius: 0;
+        border-top: none;
+        border-bottom: none;
+        margin-bottom: 1rem;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+      }
+      
+      .services-section-title {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+      }
+      
+      .hero-header-overlay.visible {
+        background: #1a1a1a !important;
+      }
+      
+      .card-badge {
+        display: none;
+      }
+      
+      .slider-dots {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .carousel-container {
+        height: 500px;
+        transform: translateX(0);
+        margin: 0 auto;
+      }
+      
+      .carousel-item {
+        width: 280px;
+        height: 420px;
+      }
+      
+      .service-image {
+        height: 140px;
+      }
+      
+      .service-content h3 {
+        font-size: 1.2rem;
+      }
+      
+      .service-content p {
+        font-size: 0.9rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+        letter-spacing: 3px;
+        border-radius: 0;
+        border-top: none;
+        border-bottom: none;
+        margin-bottom: 1rem;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+      }
+      
+      .services-section-title {
+        font-size: 2rem;
+        letter-spacing: 3px;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+      }
+      
+      .footer {
+        padding: 60px 20px 30px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      
+      .footer-section {
+        align-items: center;
+      }
+      
+      .footer-contact {
+        align-items: center;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .services-offered-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .services-section-title {
+        font-size: 2rem;
+        padding: 20px 0;
+        letter-spacing: 2px;
+        margin-bottom: 2rem;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+      }
+      
+      .service-offered-card {
+        padding: 30px 25px;
+      }
+      
+      .service-offered-card h3 {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+        padding: 20px 0;
+        letter-spacing: 3px;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        border-radius: 0;
+        border-top: none;
+        border-bottom: none;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+      }
+      
+      .services-section {
+        padding: 0 0 35px 0;
+        margin-top: -60px;
+      }
+      
+      .services-offered-section {
+        padding: 15px 0 60px 0;
+        margin-top: -25px;
+      }
+      
+      .services-section-title {
+        margin-top: 0;
+        padding-top: 20px;
+      }
+      
+      .partners-section {
+        padding: 0;
+      }
+      
+      .partners-title {
+        font-size: 2rem;
+        letter-spacing: 4px;
+        margin-bottom: 2rem;
+      }
+      
+      .partner-item {
+        width: 300px;
+        height: 180px;
+        padding: 0;
+      }
+      
+      .partners-track {
+        gap: 40px;
+        animation-duration: 25s;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-headline img {
+        max-height: 228px;
+      }
+      
+      .hero-subheadline {
+        font-size: 0.855rem;
+        padding: 0 15px;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        padding: 15px 0;
+        border-radius: 0;
+        border-top: none;
+        border-bottom: none;
+        margin-bottom: 1rem;
+        background: #ffffff !important;
+      }
+      
+      .services-section-title {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        padding: 15px 0;
+        background: #1a1a1a !important;
+        color: #ffffff !important;
+      }
+      
+      .service-content h3 {
+        font-size: 1.1rem;
+      }
+      
+      .service-content p {
+        font-size: 0.85rem;
+      }
+      
+      .service-btn {
+        font-size: 0.8rem;
+        padding: 10px 20px;
+        min-height: 44px;
+        touch-action: manipulation;
+      }
+      
+      .service-offered-card {
+        padding: 25px 20px;
+      }
+      
+      .service-offered-card h3 {
+        font-size: 1.1rem;
+      }
+      
+      .service-offered-card p {
+        font-size: 0.9rem;
+      }
+      
+      .partners-section {
+        padding: 0;
+      }
+      
+      .partners-title {
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+        margin-bottom: 1.5rem;
+      }
+      
+      .partner-item {
+        width: 240px;
+        height: 140px;
+        padding: 0;
+      }
+      
+      .partners-track {
+        gap: 30px;
+        animation-duration: 20s;
+      }
+      
+      .services-grid {
+        padding: 0 10px;
+      }
+      
+      .card-badge {
+        width: 55px;
+        height: 55px;
+        top: -15px;
+        left: -15px;
+      }
+      
+      .card-badge img {
+        width: 35px;
+      }
+      
+      .service-image {
+        height: 200px;
+      }
+      
+      .footer {
+        padding: 50px 15px 25px;
+      }
+      
+      .footer-grid {
+        gap: 30px;
+      }
+      
+      .hero-btn {
+        font-size: 0.9rem;
+        padding: 13.3px 26.6px !important;
+        max-width: 252.7px;
+        min-height: 43.32px;
+      }
+      
+      .scroll-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <img src="./perfection86.webp" alt="Perfection 86 Logo" class="loading-logo">
+    <div class="loading-progress-container">
+      <div class="loading-progress-bar" id="loadingProgressBar"></div>
+    </div>
+    <div class="loading-percentage" id="loadingPercentage">0%</div>
+  </div>
+  <!-- Hero Header Overlay - Transparent -->
+  <div class="hero-header-overlay" id="hero-header-overlay">
+    <nav class="hero-header-nav">
+      <!-- Replace with actual logo image: <img src="./Images/logo.png" alt="Auto Restoration Logo" class="hero-header-logo" /> -->
+      <div class="logo-placeholder">
+        <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-header-logo">
+      </div>
+      <a href="#home">SĀKUMS</a>
+      <a href="#services">PAKALPOJUMI</a>
+      <a href="#about">PAR MUMS</a>
+      <a href="#contact">KONTAKTI</a>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <!-- Hero Video Background -->
+    <video class="hero-video" src="./skys2.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" x-webkit-airplay="allow" disablePictureInPicture style="pointer-events: none;"></video>
+    
+    <!-- Mobile Logo and Menu -->
+    <!-- Replace with actual logo: <img src="./Images/logo.png" alt="Auto Restoration Logo" class="hero-mobile-logo" /> -->
+    <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
+    <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
+    <div class="hero-mobile-dropdown" id="hero-mobile-dropdown">
+      <a href="#home">Sākums</a>
+      <a href="#services">Pakalpojumi</a>
+      <a href="#about">Par mums</a>
+      <a href="#contact">Kontakti</a>
+    </div>
+    
+    <!-- Hero Content -->
+    <div class="hero-content" id="hero-content">
+      <div class="hero-headline">
+        <img src="./perfection86.webp" alt="PROFESSIONAL AUTO RESTORATION">
+      </div>
+      <div class="hero-subheadline">Mašīnu restaurācijas un pārkrāsošanas pakalpojumi</div>
+      <div class="hero-buttons">
+        <a href="#services" class="hero-btn primary">PAKALPOJUMI</a>
+        <a href="#contact" class="hero-btn secondary">KONTAKTI</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Projects Showcase Section -->
+    <section id="services" class="services-section">
+      <h2 class="section-title" data-text="REALIZĒTIE AUTO PROJEKTI">REALIZĒTIE AUTO PROJEKTI</h2>
+      <div class="toy-car-container">
+        <div class="toy-car" id="toy-car">
+          <img src="./bmw.png" alt="BMW Car" class="bmw-car-image">
+        </div>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel" id="carousel">
+          <!-- Carousel items will be generated by JavaScript -->
+        </div>
+        
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevBtn">‹</button>
+          <button class="carousel-btn" id="nextBtn">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services-offered" class="services-offered-section">
+      <div class="container">
+        <h2 class="services-section-title">Pakalpojumu klāsts</h2>
+        <div class="services-offered-grid">
+          <div class="service-offered-card">
+            <img src="./evo.png" alt="Towing Truck" class="service-icon-img">
+            <h3>Autoevakuātora pakalpojumi</h3>
+            <p>Nereti gadās, ka dažādu iemeslu dēļ auto pēkšņi vairs nav iespējams iedarbināt vai nav iespējams piedalīties satiksmē. Visbiežāk šādu situāciju gadījumos pirmā doma ir – zvans draugam, bet ne vienmēr tas ir labākais risinājums.</p>
+          </div>
+          
+          <div class="service-offered-card" onclick="window.location.href='./painting.html'" style="cursor: pointer;">
+            <img src="./paint.png" alt="Paint Brush" class="service-icon-img">
+            <h3>Auto virsbūves krāsošana un remonts</h3>
+            <p>Auto krāsošana ir darbs ar kuru agrāk vai vēlāk nākas saskarties gandrīz ikvienam auto vadītājam. Neatkarīgi no tā vai vēlies savam auto atjaunot sākotnējo spīdumu pārkrāsojot visu virsbūvi, vai tikai izlabot kādu nelielu defektu, Perfection 86 meistari par to parūpēsies.</p>
+          </div>
+          
+           <div class="service-offered-card" onclick="window.location.href='./engine-work.html'" style="cursor: pointer;">
+             <img src="./motors.png" alt="Engine" class="service-icon-img motors">
+             <h3>Dzinēju remonts un apkope</h3>
+             <p>Dzinējs ir viens no vissarežģītākajiem automašīnas agregātiem. No motora tehniskā stāvokļa ir atkarīga tā jauda, degvielas un eļļas patēriņš, kā arī visa automobiļa ekspluatācija. Tāpēc visā automobiļa ekspluatācijas laikā ir ļoti svarīgi savlaicīgi ievērot un novērst visus, tā atsevišķo mehānismu un sistēmas darbības traucējumus, kā arī veikt savlaicīgas apkopes.</p>
+           </div>
+           
+          <div class="service-offered-card" onclick="window.location.href='./suspension.html'" style="cursor: pointer;">
+            <img src="./riepa.png" alt="Tire" class="service-icon-img riepa">
+            <h3>Ritošās daļas remonts</h3>
+            <p>Visbiežākās problēmas ar ritošo daļu var novērot bremžu sistēmā, savirzē, stūres mehānismā.<br><br>Kā jebkura auto remonta procesa sākumā ir jāveic diagnostika, lai precīzi saprastu, kura detaļa ir nolietojusies vai bojāta. Nereti, protams, izjūtot konkrētus traucējumus auto vadīšanā var secināt uzreiz, kas tieši ir par problēmu, bet ne vienmēr.</p>
+          </div>
+           
+          <div class="service-offered-card" onclick="window.location.href='./auto-polish.html'" style="cursor: pointer;">
+            <img src="./details.png" alt="Details" class="service-icon-img details">
+            <h3>VIRSBŪVES PULEŠANA</h3>
+            <p>Automašīnas virsbūves pulēšanu var veikt neatkarīgi no krāsas un izmēra. Auto pulēšana komplektā ar auto vaskošanu pasargās automašīnu no apkārtējās vides – lietus, sāļiem, apkārtējās ķīmijas. Auto virsbūves pulēšanas laiks un izmaksas iespējams noteikt redzot automašīnu un saprotot klienta vēlmes un iespējas.</p>
+          </div>
+           
+          <div class="service-offered-card" onclick="window.location.href='./restoration.html'" style="cursor: pointer;">
+            <img src="./res3.png" alt="Restoration" class="service-icon-img">
+            <h3>RESTAURĀCIJA</h3>
+            <p>Perfection 86 darbnīca nodarbojas ar profesionālu auto restaurāciju no A līdz Z! Ja Tavā īpašumā ir kāds sens vai īpašs auto, kuru skāris "laika zobs", bet vēlies tam dot otro dzīvību – mēs Tev palīdzēsim. Esam restaurējuši tādus ikoniskus auto kā Wandarer W23, Nissan Skyline R34, Toyota Supra, BMW E30, Toyota AE86 un daudz citu.</p>
+          </div>
+         </div>
+       </div>
+     </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section">
+      <div class="partners-container">
+        <h2 class="partners-title">MŪSU SADARBĪBAS PARTNERI</h2>
+        <div class="partners-slider">
+          <div class="partners-track">
+            <div class="partner-item">
+              <img src="./partneri/baltalogo.webp" alt="Balta Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/btalogo.webp" alt="BTA Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/dtslogo.webp" alt="DTS Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/ergologo.webp" alt="Ergo Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/gjeslogo.webp" alt="GJES Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/iflogo.webp" alt="IF Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/ragslogo.webp" alt="RAGS Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/tehnicolorlogo.webp" alt="Technicolor Logo">
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="partner-item">
+              <img src="./partneri/baltalogo.webp" alt="Balta Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/btalogo.webp" alt="BTA Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/dtslogo.webp" alt="DTS Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/ergologo.webp" alt="Ergo Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/gjeslogo.webp" alt="GJES Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/iflogo.webp" alt="IF Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/ragslogo.webp" alt="RAGS Logo">
+            </div>
+            <div class="partner-item">
+              <img src="./partneri/tehnicolorlogo.webp" alt="Technicolor Logo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">PERFECTION 86</h3>
+          <p class="footer-text">Mašīnu restaurācijas un pārkrāsošanas pakalpojumi</p>
+          <img src="./perfection86.webp" alt="Perfection 86 Logo" class="footer-logo">
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-section-title">KONTAKTI</h4>
+          <div class="footer-contact">
+            <p class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Kungu iela 87a, Liepāja, LV-3401</span>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <a href="tel:+37124987686">+371 24 987 686</a>
+            </p>
+            <p class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:sveilisaivis@gmail.com">sveilisaivis@gmail.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Perfection 86. Visas tiesības aizsargātas.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Loading Screen Logic
+    (function() {
+      const loadingScreen = document.getElementById('loadingScreen');
+      const progressBar = document.getElementById('loadingProgressBar');
+      const loadingPercentage = document.getElementById('loadingPercentage');
+      
+      if (!loadingScreen || !progressBar || !loadingPercentage) return;
+      
+      // Collect all images and videos (excluding loading screen logo)
+      const images = Array.from(document.querySelectorAll('img')).filter(img => 
+        !img.classList.contains('loading-logo')
+      );
+      const videos = document.querySelectorAll('video');
+      const totalAssets = images.length + videos.length;
+      let loadedAssets = 0;
+      
+      // If no assets to load, hide loader immediately
+      if (totalAssets === 0) {
+        setTimeout(() => {
+          loadingScreen.classList.add('hidden');
+          document.body.classList.remove('loading');
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+          }, 500);
+        }, 500);
+        return;
+      }
+      
+      function updateProgress() {
+        const progress = Math.min(Math.round((loadedAssets / totalAssets) * 100), 100);
+        progressBar.style.width = progress + '%';
+        loadingPercentage.textContent = progress + '%';
+        
+        if (loadedAssets >= totalAssets) {
+          // Small delay to show 100%
+          setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+            document.body.classList.remove('loading');
+            // Remove from DOM after animation
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }, 300);
+        }
+      }
+      
+      // Track image loading
+      images.forEach(img => {
+        if (img.complete) {
+          loadedAssets++;
+          updateProgress();
+        } else {
+          img.addEventListener('load', () => {
+            loadedAssets++;
+            updateProgress();
+          });
+          img.addEventListener('error', () => {
+            loadedAssets++;
+            updateProgress();
+          });
+        }
+      });
+      
+      // Track video loading
+      videos.forEach(video => {
+        if (video.readyState >= 3) { // HAVE_FUTURE_DATA or higher
+          loadedAssets++;
+          updateProgress();
+        } else {
+          video.addEventListener('canplaythrough', () => {
+            loadedAssets++;
+            updateProgress();
+          }, { once: true });
+          video.addEventListener('error', () => {
+            loadedAssets++;
+            updateProgress();
+          }, { once: true });
+        }
+      });
+      
+      // Fallback: hide loader after max time (10 seconds)
+      setTimeout(() => {
+        if (!loadingScreen.classList.contains('hidden')) {
+          progressBar.style.width = '100%';
+          loadingPercentage.textContent = '100%';
+          setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+            document.body.classList.remove('loading');
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }, 300);
+        }
+      }, 10000);
+      
+      // Initialize body with loading class
+      document.body.classList.add('loading');
+    })();
+    
+    // Animate hero text on load (fade-in up)
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fix video autoplay on iOS devices
+      const heroVideo = document.querySelector('.hero-video');
+      if (heroVideo) {
+        // Force attributes for iOS compatibility
+        heroVideo.setAttribute('playsinline', '');
+        heroVideo.setAttribute('webkit-playsinline', '');
+        heroVideo.setAttribute('x-webkit-airplay', 'allow');
+        heroVideo.setAttribute('loop', '');
+        heroVideo.muted = true;
+        heroVideo.autoplay = true;
+        heroVideo.loop = true;
+        
+        // Function to attempt video play
+        function attemptPlay() {
+          const playPromise = heroVideo.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              // Auto-play was prevented
+              console.log('Video autoplay prevented, will play on user interaction');
+            });
+          }
+        }
+        
+        // Try to play immediately
+        attemptPlay();
+        
+        // Try to play when video metadata is loaded
+        heroVideo.addEventListener('loadedmetadata', attemptPlay);
+        heroVideo.addEventListener('canplay', attemptPlay);
+        heroVideo.addEventListener('loadeddata', attemptPlay);
+        
+        // Play on first user interaction (iOS requirement)
+        const playOnInteraction = function() {
+          attemptPlay();
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('scroll', playOnInteraction);
+        };
+        document.addEventListener('touchstart', playOnInteraction, { once: true, passive: true });
+        document.addEventListener('click', playOnInteraction, { once: true });
+        window.addEventListener('scroll', playOnInteraction, { once: true, passive: true });
+        
+        // Ensure video loops endlessly - restart if it ends (fallback)
+        heroVideo.addEventListener('ended', function() {
+          this.currentTime = 0;
+          this.play().catch(error => {
+            console.log('Video restart prevented');
+          });
+        });
+      }
+      
+      setTimeout(function() {
+        const heroContent = document.getElementById('hero-content');
+        if (heroContent) {
+          heroContent.classList.add('visible');
+          heroContent.style.opacity = '1';
+          heroContent.style.transform = 'translateY(0)';
+        }
+      }, 200);
+      
+      // Hero header overlay scroll behavior
+      const heroHeader = document.getElementById('hero-header-overlay');
+      
+      function updateHeroHeader() {
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 50) {
+          heroHeader.classList.add('visible');
+        } else {
+          heroHeader.classList.remove('visible');
+        }
+      }
+      
+      // Use throttled scroll handler
+      let scrollTimeout;
+      window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+          window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(updateHeroHeader);
+      }, { passive: true });
+      
+      window.addEventListener('resize', updateHeroHeader);
+      updateHeroHeader();
+      
+      // Video background doesn't need parallax effect
+      
+      // Mobile hero dropdown menu logic
+      const menuBtn = document.getElementById('hero-mobile-menu-btn');
+      const menuDropdown = document.getElementById('hero-mobile-dropdown');
+      
+      if (menuBtn && menuDropdown) {
+        menuBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          menuDropdown.classList.toggle('open');
+          menuBtn.classList.toggle('open');
+        });
+        
+        document.addEventListener('click', function(e) {
+          if (!menuDropdown.contains(e.target) && e.target !== menuBtn) {
+            menuDropdown.classList.remove('open');
+            menuBtn.classList.remove('open');
+          }
+        });
+      }
+      
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (href !== '#' && href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              const offsetTop = target.offsetTop - 80;
+              window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+              });
+              
+              // Close mobile menu if open
+              if (menuDropdown && menuDropdown.classList.contains('open')) {
+                menuDropdown.classList.remove('open');
+                menuBtn.classList.remove('open');
+              }
+            }
+          }
+        });
+      });
+      
+      // Fade-in animation for service cards on scroll
+      const serviceCards = document.querySelectorAll('.service-card');
+      
+      // Show cards immediately on page load for both mobile and desktop
+      serviceCards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      });
+      
+      // Helper function to initialize slider when visible
+      function initSliderOnVisible(sliderSelector) {
+        const slider = document.querySelector(sliderSelector);
+        if (!slider) return;
+        
+        const card = slider.closest('.service-card');
+        if (!card) return;
+        
+        const slides = slider.querySelectorAll('.slide');
+        const dots = slider.querySelectorAll('.dot');
+        let currentSlide = 0;
+        let slideInterval;
+        let hasStarted = false;
+        
+        function showSlide(index) {
+          slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+              slide.classList.add('active');
+            }
+          });
+          
+          dots.forEach((dot, i) => {
+            dot.classList.remove('active');
+            if (i === index) {
+              dot.classList.add('active');
+            }
+          });
+        }
+        
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % slides.length;
+          showSlide(currentSlide);
+        }
+        
+        function startSlider() {
+          if (slideInterval) clearInterval(slideInterval);
+          slideInterval = setInterval(nextSlide, 3000);
+        }
+        
+        function stopSlider() {
+          if (slideInterval) clearInterval(slideInterval);
+        }
+        
+        // Initialize slider when card comes into view
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasStarted) {
+              hasStarted = true;
+              startSlider();
+            }
+          });
+        }, { threshold: 0.3 });
+        
+        observer.observe(card);
+        
+        // Pause on hover
+        slider.addEventListener('mouseenter', stopSlider);
+        slider.addEventListener('mouseleave', () => {
+          if (hasStarted) startSlider();
+        });
+        
+        // Dot click navigation
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+            stopSlider();
+            if (hasStarted) {
+              setTimeout(() => startSlider(), 500);
+            }
+          });
+        });
+      }
+      
+      // Initialize all sliders when visible
+      initSliderOnVisible('.mustang-slider');
+      
+      initSliderOnVisible('.corvette-slider');
+      
+      initSliderOnVisible('.chevelle-slider');
+      
+      initSliderOnVisible('.camaro-slider');
+      
+      // Scroll to Top Button
+      const scrollTopBtn = document.getElementById('scrollTop');
+      
+      if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('visible');
+          } else {
+            scrollTopBtn.classList.remove('visible');
+          }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+      
+      // Toy Car Animation on Scroll
+      const toyCar = document.getElementById('toy-car');
+      const servicesSection = document.getElementById('services');
+      let carAnimated = false;
+      
+      function checkCarAnimation() {
+        if (carAnimated) return;
+        
+        if (servicesSection) {
+          const rect = servicesSection.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          
+          if (isVisible && toyCar) {
+            toyCar.classList.add('animate');
+            carAnimated = true;
+          }
+        }
+      }
+      
+      // Check on scroll
+      window.addEventListener('scroll', checkCarAnimation);
+      
+      // Check on load
+      checkCarAnimation();
+      
+      // 3D Carousel Initialization
+      const portfolioData = [
+        {
+          id: 1,
+          title: 'NISSAN R34 SKYLINE',
+          description: 'Pilnīga virsbūves pārkrāsošana un atjaunošana ietvēra darbu pilnā spektrā – sākām ar rūpīgu virsbūves sagatavošanu, noņemot veco krāsu, izlīdzinot visas virsmas un novēršot visus defektus. Pēc tam tika veikta profesionāla gruntēšana un augstas kvalitātes krāsošana ar mūsdienīgākajiem materiāliem, nodrošinot vizuāli nevainojamu un ilgstoši izturīgu rezultātu visā virsbūvē.',
+          image: './1.jpg',
+          images: ['./1.jpg', './2.jpg', './3.jpg', './4.jpg'],
+          tags: ['Krāsošana', 'Virsbūves remonts', 'Gruntēšana'],
+          link: './car-project.html?car=r34'
+        },
+        {
+          id: 2,
+          title: 'BMW E30',
+          description: 'Šis projekts bija pilnīga auto restaurācija, kas nozīmēja visu transportlīdzekļa atjaunošanu no nulles. Mēs veicām dzinēja kapitālo remontu, pilnīgu virsbūves restaurāciju un krāsošanu, kā arī pilnībā atjaunojām interjeru un nomainījām visas nepieciešamās detaļas, tādējādi panākot oriģinālu izskatu apvienojumā ar uzticamu tehnisko darbību.',
+          image: './11.jpg',
+          images: ['./11.jpg', './12.jpg', './13.jpg'],
+          tags: ['Pilnīga restaurācija', 'Dzinējs', 'Virsbūve'],
+          link: './car-project.html?car=e30'
+        },
+        {
+          id: 3,
+          title: 'TOYOTA SUPRA',
+          description: 'Mēs realizējām pilnīgu restaurāciju visā spektrā, sākot no dzinēja kapitālā remonta līdz pat virsbūves atjaunošanai. Restaurācijas procesā tika iekļauta visu sistēmu rūpīga pārbaude un defektācija, nepieciešamo komponentu nomaiņa un profesionāla krāsošana, kas garantēja, ka auto iegūst ne tikai oriģinālu izskatu, bet arī tehniski darbojas kā jauns.',
+          image: './sup3.jpg',
+          images: ['./sup3.jpg', './sup1.jpg', './sup.jpg'],
+          tags: ['Pilnīga restaurācija', 'Virsbūve', 'Dzinējs'],
+          link: './car-project.html?car=supra'
+        },
+        {
+          id: 4,
+          title: 'NISSAN SKYLINE',
+          description: 'Šajā projektā tika veikta pilnīga virsbūves pārkrāsošana un atjaunošana, kas ietvēra detalizētu virsbūves sagatavošanu, veco krāsu noņemšanu, virsmu izlīdzināšanu un defektu korekciju. Gala rezultāts tika panākts, izmantojot profesionālu gruntēšanu un augstas kvalitātes krāsošanu ar mūsdienīgākajiem materiāliem, nodrošinot ideālu rezultātu visā virsbūvē.',
+          image: './z1.jpg',
+          images: ['./z1.jpg', './z2.jpg', './z3.jpg'],
+          tags: ['Krāsošana', 'Virsbūves remonts', 'Gruntēšana'],
+          link: './car-project.html?car=skyline'
+        },
+        {
+          id: 5,
+          title: 'NISSAN R34 SKYLINE',
+          description: 'Pilnīga virsbūves pārkrāsošana un atjaunošana ietvēra darbu pilnā spektrā – sākām ar rūpīgu virsbūves sagatavošanu, noņemot veco krāsu, izlīdzinot visas virsmas un novēršot visus defektus. Pēc tam tika veikta profesionāla gruntēšana un augstas kvalitātes krāsošana ar mūsdienīgākajiem materiāliem, nodrošinot vizuāli nevainojamu un ilgstoši izturīgu rezultātu visā virsbūvē.',
+          image: './1.jpg',
+          images: ['./1.jpg', './2.jpg', './3.jpg', './4.jpg'],
+          tags: ['Krāsošana', 'Virsbūves remonts', 'Gruntēšana'],
+          link: './car-project.html?car=r34'
+        },
+        {
+          id: 6,
+          title: 'BMW E30',
+          description: 'Šis projekts bija pilnīga auto restaurācija, kas nozīmēja visu transportlīdzekļa atjaunošanu no nulles. Mēs veicām dzinēja kapitālo remontu, pilnīgu virsbūves restaurāciju un krāsošanu, kā arī pilnībā atjaunojām interjeru un nomainījām visas nepieciešamās detaļas, tādējādi panākot oriģinālu izskatu apvienojumā ar uzticamu tehnisko darbību.',
+          image: './11.jpg',
+          images: ['./11.jpg', './12.jpg', './13.jpg'],
+          tags: ['Pilnīga restaurācija', 'Dzinējs', 'Virsbūve'],
+          link: './car-project.html?car=e30'
+        },
+        {
+          id: 7,
+          title: 'TOYOTA SUPRA',
+          description: 'Mēs realizējām pilnīgu restaurāciju visā spektrā, sākot no dzinēja kapitālā remonta līdz pat virsbūves atjaunošanai. Restaurācijas procesā tika iekļauta visu sistēmu rūpīga pārbaude un defektācija, nepieciešamo komponentu nomaiņa un profesionāla krāsošana, kas garantēja, ka auto iegūst ne tikai oriģinālu izskatu, bet arī tehniski darbojas kā jauns.',
+          image: './sup3.jpg',
+          images: ['./sup3.jpg', './sup1.jpg', './sup.jpg'],
+          tags: ['Pilnīga restaurācija', 'Virsbūve', 'Dzinējs'],
+          link: './car-project.html?car=supra'
+        }
+      ];
+      
+      let currentIndex = 0;
+      const carousel = document.getElementById('carousel');
+      
+      function createCarouselItem(data, index) {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        item.dataset.index = index;
+        
+        const tagsHtml = data.tags.map(tag => 
+          `<span class="project-tag">${tag}</span>`
+        ).join('');
+        
+        const firstImage = data.images ? data.images[0] : data.image;
+        
+        // Only R34 Skyline cards should have working detail button
+        const isR34 = data.title === 'NISSAN R34 SKYLINE';
+        const detailButtonClick = isR34 
+          ? `onclick="event.stopPropagation(); window.location.href='${data.link}';"`
+          : `onclick="event.stopPropagation(); event.preventDefault(); return false;"`;
+        
+        const cardOnClick = isR34 
+          ? `onclick="window.location.href='${data.link}'" style="cursor: pointer;"`
+          : '';
+        
+        item.innerHTML = `
+          <div class="service-card" ${cardOnClick}>
+            <div class="card-number">0${data.id}</div>
+            <div class="service-image">
+              <img src="${firstImage}" alt="${data.title}">
+            </div>
+            <div class="service-content">
+              <div class="project-tags">${tagsHtml}</div>
+              <h3>${data.title}</h3>
+              <p>${data.description}</p>
+              <a href="${isR34 ? data.link : '#'}" class="service-btn" ${detailButtonClick}>Skatīt detalizēti →</a>
+            </div>
+          </div>
+        `;
+        
+        return item;
+      }
+      
+      function initCarousel() {
+        if (!carousel) return;
+        
+        portfolioData.forEach((data, index) => {
+          const item = createCarouselItem(data, index);
+          carousel.appendChild(item);
+        });
+        
+        updateCarousel();
+      }
+      
+      function updateCarousel() {
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+        const isMobile = window.innerWidth <= 768;
+        const isTablet = window.innerWidth <= 1024;
+        
+        items.forEach((item, index) => {
+          let offset = index - currentIndex;
+          
+          if (offset > totalItems / 2) {
+            offset -= totalItems;
+          } else if (offset < -totalItems / 2) {
+            offset += totalItems;
+          }
+          
+          const absOffset = Math.abs(offset);
+          const sign = offset < 0 ? -1 : 1;
+          
+          item.style.transform = '';
+          item.style.opacity = '';
+          item.style.zIndex = '';
+          item.style.transition = 'all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1)';
+          
+          let spacing1 = 480;
+          let spacing2 = 720;
+          let spacing3 = 900;
+          
+          if (isMobile) {
+            spacing1 = 280;
+            spacing2 = 420;
+            spacing3 = 550;
+          } else if (isTablet) {
+            spacing1 = 400;
+            spacing2 = 600;
+            spacing3 = 750;
+          }
+          
+          if (absOffset === 0) {
+            item.style.transform = 'translate(-50%, -50%) translateZ(0) scale(1)';
+            item.style.opacity = '1';
+            item.style.zIndex = '10';
+          } else if (absOffset === 1) {
+            const translateX = sign * spacing1;
+            const rotation = isMobile ? 25 : 30;
+            const scale = isMobile ? 0.88 : 0.85;
+            item.style.transform = `translate(-50%, -50%) translateX(${translateX}px) translateZ(-200px) rotateY(${-sign * rotation}deg) scale(${scale})`;
+            item.style.opacity = '0.8';
+            item.style.zIndex = '5';
+          } else if (absOffset === 2) {
+            const translateX = sign * spacing2;
+            const rotation = isMobile ? 35 : 40;
+            const scale = isMobile ? 0.75 : 0.7;
+            item.style.transform = `translate(-50%, -50%) translateX(${translateX}px) translateZ(-350px) rotateY(${-sign * rotation}deg) scale(${scale})`;
+            item.style.opacity = '0.5';
+            item.style.zIndex = '3';
+          } else if (absOffset === 3) {
+            const translateX = sign * spacing3;
+            const rotation = isMobile ? 40 : 45;
+            const scale = isMobile ? 0.65 : 0.6;
+            item.style.transform = `translate(-50%, -50%) translateX(${translateX}px) translateZ(-450px) rotateY(${-sign * rotation}deg) scale(${scale})`;
+            item.style.opacity = '0.3';
+            item.style.zIndex = '2';
+          } else {
+            item.style.transform = 'translate(-50%, -50%) translateZ(-500px) scale(0.5)';
+            item.style.opacity = '0';
+            item.style.zIndex = '1';
+          }
+        });
+      }
+      
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % portfolioData.length;
+        updateCarousel();
+      }
+      
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + portfolioData.length) % portfolioData.length;
+        updateCarousel();
+      }
+      
+      function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+      }
+      
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      
+      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+      
+      // Auto-rotate carousel
+      setInterval(nextSlide, 5000);
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+      });
+      
+      // Update carousel on window resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          updateCarousel();
+        }, 250);
+      });
+      
+      // Initialize carousel
+      initCarousel();
+      
+    });
+  </script>
+  
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
