@@ -258,10 +258,10 @@
     
     .hero-mobile-dropdown {
       display: none;
-      position: fixed;
+      position: absolute;
       top: 62px;
       right: 18px;
-      z-index: 1002;
+      z-index: 20;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(34,34,34,0.13);
@@ -273,6 +273,19 @@
     
     .hero-mobile-dropdown.open {
       display: flex;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0;
+      box-shadow: none;
+      padding: 20px;
+      min-width: auto;
+      gap: 0;
+      z-index: 1000;
     }
     
     .hero-mobile-dropdown a {
@@ -290,9 +303,23 @@
       letter-spacing: 2px;
     }
     
+    .hero-mobile-dropdown.open a {
+      color: #fff;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    
     .hero-mobile-dropdown a:hover {
       background: var(--accent);
       color: #fff;
+    }
+    
+    .hero-mobile-dropdown.open a:hover {
+      background: transparent;
+      color: var(--lightning-red);
     }
     
     /* Main Container */
@@ -1902,18 +1929,26 @@
       document.addEventListener('click', showMenuButton, { once: true });
       window.addEventListener('scroll', showMenuButton, { once: true, passive: true });
       
+      const closeMenu = function() {
+        menuDropdown.classList.remove('open');
+        menuBtn.classList.remove('open');
+      };
+      
+      const toggleMenu = function() {
+        menuDropdown.classList.toggle('open');
+        menuBtn.classList.toggle('open');
+      };
+      
       if (menuBtn && menuDropdown) {
         menuBtn.addEventListener('click', function(e) {
           e.stopPropagation();
-          menuDropdown.classList.toggle('open');
-          menuBtn.classList.toggle('open');
+          toggleMenu();
         });
         
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
           if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
-            menuDropdown.classList.remove('open');
-            menuBtn.classList.remove('open');
+            closeMenu();
           }
         });
       }
