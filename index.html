@@ -335,6 +335,68 @@
       z-index: 1000;
     }
     
+    .hero-mobile-header-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: #1a1a1a;
+      z-index: 999;
+    }
+    
+    .hero-mobile-header-overlay.active {
+      display: block;
+    }
+    
+    .hero-mobile-header-overlay-logo {
+      display: none;
+      position: absolute;
+      top: 7.5px;
+      left: 18px;
+      z-index: 1000;
+      height: 65px;
+      width: auto;
+      max-width: 205px;
+      filter: brightness(0) invert(1);
+      object-fit: contain;
+    }
+    
+    .hero-mobile-header-overlay.active .hero-mobile-header-overlay-logo {
+      display: block;
+    }
+    
+    .hero-mobile-header-overlay-menu-btn {
+      display: none;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 1000;
+      height: 38px;
+      width: 38px;
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .hero-mobile-header-overlay.active .hero-mobile-header-overlay-menu-btn {
+      display: flex;
+    }
+    
+    .hero-mobile-header-overlay-menu-btn:active,
+    .hero-mobile-header-overlay-menu-btn.open {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    
     .hero-mobile-dropdown a {
       color: #222;
       text-decoration: none;
@@ -367,6 +429,43 @@
     .hero-mobile-dropdown.open a:hover {
       background: transparent;
       color: var(--lightning-red);
+    }
+    
+    .hero-mobile-dropdown-close {
+      display: none;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1001;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    
+    .hero-mobile-dropdown.open .hero-mobile-dropdown-close {
+      display: flex;
+    }
+    
+    .hero-mobile-dropdown-close:hover {
+      background: var(--lightning-red);
+      border-color: var(--lightning-red);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+    
+    .hero-mobile-dropdown-close:active {
+      transform: rotate(90deg) scale(0.95);
     }
     
     /* Hero Section */
@@ -782,7 +881,7 @@
     }
     
     .service-content {
-      padding: 20px 32px 32px 32px;
+      padding: 10px 20px 20px 20px;
       text-align: left;
       position: relative;
       z-index: 2;
@@ -795,7 +894,7 @@
       font-family: 'Inter', Arial, sans-serif;
       font-size: 24px;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 2px;
       background: linear-gradient(135deg, #ffffff, var(--lightning-red));
@@ -830,19 +929,26 @@
     }
     
     .service-btn {
-      padding: 12px 30px;
+      padding: 6px 10px;
       background: linear-gradient(135deg, var(--lightning-red), #cc0000);
       border: none;
-      border-radius: 30px;
+      border-radius: 20px;
       color: #ffffff;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 0.2px;
+      font-size: 9px;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
       text-decoration: none;
       display: inline-block;
+      text-align: center;
+      box-sizing: border-box;
+      white-space: nowrap;
+      line-height: 1.5;
+      padding-top: 8px;
+      padding-bottom: 5px;
     }
     
     .service-btn:hover {
@@ -2116,9 +2222,14 @@
     
     <!-- Mobile Logo and Menu -->
     <!-- Replace with actual logo: <img src="./Images/logo.png" alt="Auto Restoration Logo" class="hero-mobile-logo" /> -->
+    <div class="hero-mobile-header-overlay">
+      <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-header-overlay-logo">
+      <button class="hero-mobile-header-overlay-menu-btn" id="hero-mobile-header-overlay-menu-btn" aria-label="Close menu">☰</button>
+    </div>
     <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-mobile-logo">
     <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
     <div class="hero-mobile-dropdown" id="hero-mobile-dropdown">
+      <button class="hero-mobile-dropdown-close" id="hero-mobile-dropdown-close" aria-label="Close menu">×</button>
       <a href="#home">Sākums</a>
       <a href="#services">Pakalpojumi</a>
       <a href="#about">Par mums</a>
@@ -2490,18 +2601,62 @@
       // Mobile hero dropdown menu logic
       const menuBtn = document.getElementById('hero-mobile-menu-btn');
       const menuDropdown = document.getElementById('hero-mobile-dropdown');
+      const headerOverlay = document.querySelector('.hero-mobile-header-overlay');
+      const headerOverlayMenuBtn = document.getElementById('hero-mobile-header-overlay-menu-btn');
+      const dropdownCloseBtn = document.getElementById('hero-mobile-dropdown-close');
+      
+      const closeMenu = function() {
+        menuDropdown.classList.remove('open');
+        menuBtn.classList.remove('open');
+        if (headerOverlay) {
+          headerOverlay.classList.remove('active');
+          if (headerOverlayMenuBtn) {
+            headerOverlayMenuBtn.classList.remove('open');
+          }
+        }
+      };
+      
+      const toggleMenu = function() {
+        menuDropdown.classList.toggle('open');
+        menuBtn.classList.toggle('open');
+        if (headerOverlay) {
+          if (menuDropdown.classList.contains('open')) {
+            headerOverlay.classList.add('active');
+            if (headerOverlayMenuBtn) {
+              headerOverlayMenuBtn.classList.add('open');
+            }
+          } else {
+            headerOverlay.classList.remove('active');
+            if (headerOverlayMenuBtn) {
+              headerOverlayMenuBtn.classList.remove('open');
+            }
+          }
+        }
+      };
       
       if (menuBtn && menuDropdown) {
         menuBtn.addEventListener('click', function(e) {
           e.stopPropagation();
-          menuDropdown.classList.toggle('open');
-          menuBtn.classList.toggle('open');
+          toggleMenu();
         });
         
+        if (headerOverlayMenuBtn) {
+          headerOverlayMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+          });
+        }
+        
+        if (dropdownCloseBtn) {
+          dropdownCloseBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeMenu();
+          });
+        }
+        
         document.addEventListener('click', function(e) {
-          if (!menuDropdown.contains(e.target) && e.target !== menuBtn) {
-            menuDropdown.classList.remove('open');
-            menuBtn.classList.remove('open');
+          if (!menuDropdown.contains(e.target) && e.target !== menuBtn && e.target !== headerOverlayMenuBtn && e.target !== dropdownCloseBtn) {
+            closeMenu();
           }
         });
       }
@@ -2674,7 +2829,7 @@
         {
           id: 1,
           title: 'NISSAN R34 SKYLINE',
-          description: 'Pilnīga virsbūves pārkrāsošana un atjaunošana ietvēra darbu pilnā spektrā – sākām ar rūpīgu virsbūves sagatavošanu, noņemot veco krāsu, izlīdzinot visas virsmas un novēršot visus defektus. Pēc tam tika veikta profesionāla gruntēšana un augstas kvalitātes krāsošana ar mūsdienīgākajiem materiāliem, nodrošinot vizuāli nevainojamu un ilgstoši izturīgu rezultātu visā virsbūvē.',
+          description: 'Ievedām R34 no Japānas un pilnībā atjaunojām tā vizuālo izskatu. Uzstādījām GTR kitu',
           image: './1.jpg',
           images: ['./1.jpg', './2.jpg', './3.jpg', './4.jpg'],
           tags: ['Krāsošana', 'Virsbūves remonts', 'Gruntēšana'],
@@ -2710,7 +2865,7 @@
         {
           id: 5,
           title: 'NISSAN R34 SKYLINE',
-          description: 'Pilnīga virsbūves pārkrāsošana un atjaunošana ietvēra darbu pilnā spektrā – sākām ar rūpīgu virsbūves sagatavošanu, noņemot veco krāsu, izlīdzinot visas virsmas un novēršot visus defektus. Pēc tam tika veikta profesionāla gruntēšana un augstas kvalitātes krāsošana ar mūsdienīgākajiem materiāliem, nodrošinot vizuāli nevainojamu un ilgstoši izturīgu rezultātu visā virsbūvē.',
+          description: 'Ievedām R34 no Japānas un pilnībā atjaunojām tā vizuālo izskatu. Uzstādījām GTR kitu',
           image: './1.jpg',
           images: ['./1.jpg', './2.jpg', './3.jpg', './4.jpg'],
           tags: ['Krāsošana', 'Virsbūves remonts', 'Gruntēšana'],
@@ -2767,7 +2922,7 @@
             <div class="service-content">
               <h3>${data.title}</h3>
               <p>${data.description}</p>
-              <a href="${isR34 ? data.link : '#'}" class="service-btn" ${detailButtonClick}>Skatīt detalizēti →</a>
+              <a href="${isR34 ? data.link : '#'}" class="service-btn" ${detailButtonClick}>Skatīt projektu</a>
             </div>
           </div>
         `;
