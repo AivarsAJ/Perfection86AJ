@@ -320,6 +320,19 @@
     
     .hero-mobile-dropdown.open {
       display: flex;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0;
+      box-shadow: none;
+      padding: 20px;
+      min-width: auto;
+      gap: 0;
+      z-index: 1000;
     }
     
     .hero-mobile-dropdown a {
@@ -337,9 +350,23 @@
       letter-spacing: 2px;
     }
     
+    .hero-mobile-dropdown.open a {
+      color: #fff;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    
     .hero-mobile-dropdown a:hover {
       background: var(--accent);
       color: #fff;
+    }
+    
+    .hero-mobile-dropdown.open a:hover {
+      background: transparent;
+      color: var(--lightning-red);
     }
     
     /* Hero Section */
@@ -532,9 +559,9 @@
       padding: 20px 0 100px 0;
       background: #1a1a1a;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       margin-top: -80px;
-      z-index: 100;
+      z-index: 200;
       min-height: 800px;
       display: flex;
       flex-direction: column;
@@ -580,14 +607,15 @@
     
     .carousel-item {
       position: absolute;
-      width: 450px;
-      height: 550px;
+      width: 427.5px;
+      height: 522.5px;
       left: 50%;
       top: 50%;
       transform-style: preserve-3d;
       transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
       cursor: pointer;
       transform-origin: center center;
+      z-index: 200;
     }
     
     .service-card {
@@ -827,7 +855,7 @@
       position: absolute;
       bottom: -130px;
       left: 50%;
-      transform: translateX(-20%);
+      transform: translateX(-30%);
       display: flex;
       gap: 20px;
       z-index: 100;
@@ -862,8 +890,8 @@
       margin-top: -20px;
       background: #1a1a1a;
       position: relative;
-      overflow: hidden;
-      z-index: 400;
+      overflow: visible;
+      z-index: 100;
     }
     
     .services-offered-section::before {
@@ -1694,7 +1722,8 @@
       }
       
       .carousel-container {
-        height: 550px;
+        height: auto;
+        min-height: 550px;
         padding-top: 0;
         padding-bottom: 0;
         transform: translateX(-15px);
@@ -1706,8 +1735,8 @@
       }
       
       .carousel-item {
-        width: 300px;
-        height: 460px;
+        width: 285px;
+        height: 437px;
       }
       
       .carousel-item .service-card {
@@ -1792,7 +1821,8 @@
     
     @media (max-width: 600px) {
       .carousel-container {
-        height: 500px;
+        height: auto;
+        min-height: 500px;
         padding-bottom: 0;
         transform: translateX(-15px);
         margin: 0 auto;
@@ -1803,8 +1833,8 @@
       }
       
       .carousel-item {
-        width: 280px;
-        height: 420px;
+        width: 266px;
+        height: 399px;
       }
       
       .service-image {
@@ -1896,21 +1926,19 @@
         padding: 0 0 0 0;
         margin-top: -60px;
         margin-bottom: 0;
+        min-height: auto;
       }
       
       .services-offered-section {
-        padding: 0 0 60px 0;
-        margin-top: -80px;
-        position: relative;
-        z-index: 500;
-        background: #1a1a1a;
+        padding: 20px 0 60px 0;
+        margin-top: -20px;
+        overflow: visible;
       }
       
       .services-section-title {
-        margin-top: -30px;
-        padding-top: 0;
-        position: relative;
-        z-index: 501;
+        margin-top: 20px;
+        padding-top: 20px;
+        overflow: visible;
       }
       
       .partners-section {
@@ -1960,9 +1988,10 @@
       .services-section-title {
         font-size: 1.5rem;
         letter-spacing: 2px;
-        padding: 15px 0;
+        padding: 20px 0;
         background: #1a1a1a !important;
         color: #ffffff !important;
+        overflow: visible;
       }
       
       .service-content h3 {
@@ -2715,9 +2744,7 @@
         item.className = 'carousel-item';
         item.dataset.index = index;
         
-        const tagsHtml = data.tags.map(tag => 
-          `<span class="project-tag">${tag}</span>`
-        ).join('');
+        const tagsHtml = '';
         
         const firstImage = data.images ? data.images[0] : data.image;
         
@@ -2738,7 +2765,6 @@
               <img src="${firstImage}" alt="${data.title}">
             </div>
             <div class="service-content">
-              <div class="project-tags">${tagsHtml}</div>
               <h3>${data.title}</h3>
               <p>${data.description}</p>
               <a href="${isR34 ? data.link : '#'}" class="service-btn" ${detailButtonClick}>Skatīt detalizēti →</a>
