@@ -999,6 +999,8 @@
       padding: 0 0 30px 0;
       margin-top: -20px;
       background: #1a1a1a;
+      scroll-margin-top: 100px;
+      scroll-padding-top: 100px;
       position: relative;
       overflow: visible;
       z-index: 100;
@@ -2218,7 +2220,7 @@
         <img src="./headerologpng.png" alt="Perfection86 Logo" class="hero-header-logo">
       </div>
       <a href="#home">SĀKUMS</a>
-      <a href="#services">PAKALPOJUMI</a>
+      <a href="#services-offered">PAKALPOJUMI</a>
       <a href="#about">PAR MUMS</a>
       <a href="#contact">KONTAKTI</a>
     </nav>
@@ -2239,7 +2241,7 @@
     <button class="hero-mobile-menu-btn" id="hero-mobile-menu-btn" aria-label="Open menu">☰</button>
     <div class="hero-mobile-dropdown" id="hero-mobile-dropdown">
       <a href="#home">Sākums</a>
-      <a href="#services">Pakalpojumi</a>
+      <a href="#services-offered">Pakalpojumi</a>
       <a href="#about">Par mums</a>
       <a href="#contact">Kontakti</a>
     </div>
@@ -2284,28 +2286,28 @@
       <div class="container">
         <h2 class="services-section-title">Pakalpojumu klāsts</h2>
         <div class="services-offered-grid">
-          <div class="service-offered-card">
-            <img src="./evo.png" alt="Towing Truck" class="service-icon-img">
-            <h3>Autoevakuātora pakalpojumi</h3>
-            <p>Nereti gadās, ka dažādu iemeslu dēļ auto pēkšņi vairs nav iespējams iedarbināt vai nav iespējams piedalīties satiksmē. Visbiežāk šādu situāciju gadījumos pirmā doma ir – zvans draugam, bet ne vienmēr tas ir labākais risinājums.</p>
-          </div>
-          
           <div class="service-offered-card" onclick="window.location.href='./painting.html'" style="cursor: pointer;">
             <img src="./paint.png" alt="Paint Brush" class="service-icon-img">
             <h3>Auto virsbūves krāsošana un remonts</h3>
             <p>Auto krāsošana ir darbs ar kuru agrāk vai vēlāk nākas saskarties gandrīz ikvienam auto vadītājam. Neatkarīgi no tā vai vēlies savam auto atjaunot sākotnējo spīdumu pārkrāsojot visu virsbūvi, vai tikai izlabot kādu nelielu defektu, Perfection 86 meistari par to parūpēsies.</p>
           </div>
-          
+           
            <div class="service-offered-card" onclick="window.location.href='./engine-work.html'" style="cursor: pointer;">
              <img src="./motors.png" alt="Engine" class="service-icon-img motors">
              <h3>Dzinēju remonts un apkope</h3>
              <p>Dzinējs ir viens no vissarežģītākajiem automašīnas agregātiem. No motora tehniskā stāvokļa ir atkarīga tā jauda, degvielas un eļļas patēriņš, kā arī visa automobiļa ekspluatācija. Tāpēc visā automobiļa ekspluatācijas laikā ir ļoti svarīgi savlaicīgi ievērot un novērst visus, tā atsevišķo mehānismu un sistēmas darbības traucējumus, kā arī veikt savlaicīgas apkopes.</p>
            </div>
            
-          <div class="service-offered-card" onclick="window.location.href='./suspension.html'" style="cursor: pointer;">
+           <div class="service-offered-card" onclick="window.location.href='./suspension.html'" style="cursor: pointer;">
             <img src="./riepa.png" alt="Tire" class="service-icon-img riepa">
             <h3>Ritošās daļas remonts</h3>
             <p>Visbiežākās problēmas ar ritošo daļu var novērot bremžu sistēmā, savirzē, stūres mehānismā.<br><br>Kā jebkura auto remonta procesa sākumā ir jāveic diagnostika, lai precīzi saprastu, kura detaļa ir nolietojusies vai bojāta. Nereti, protams, izjūtot konkrētus traucējumus auto vadīšanā var secināt uzreiz, kas tieši ir par problēmu, bet ne vienmēr.</p>
+          </div>
+           
+          <div class="service-offered-card" onclick="window.location.href='./restoration.html'" style="cursor: pointer;">
+            <img src="./res3.png" alt="Restoration" class="service-icon-img">
+            <h3>RESTAURĀCIJA</h3>
+            <p>Perfection 86 darbnīca nodarbojas ar profesionālu auto restaurāciju no A līdz Z! Ja Tavā īpašumā ir kāds sens vai īpašs auto, kuru skāris "laika zobs", bet vēlies tam dot otro dzīvību – mēs Tev palīdzēsim. Esam restaurējuši tādus ikoniskus auto kā Wandarer W23, Nissan Skyline R34, Toyota Supra, BMW E30, Toyota AE86 un daudz citu.</p>
           </div>
            
           <div class="service-offered-card" onclick="window.location.href='./auto-polish.html'" style="cursor: pointer;">
@@ -2313,11 +2315,11 @@
             <h3>VIRSBŪVES PULEŠANA</h3>
             <p>Automašīnas virsbūves pulēšanu var veikt neatkarīgi no krāsas un izmēra. Auto pulēšana komplektā ar auto vaskošanu pasargās automašīnu no apkārtējās vides – lietus, sāļiem, apkārtējās ķīmijas. Auto virsbūves pulēšanas laiks un izmaksas iespējams noteikt redzot automašīnu un saprotot klienta vēlmes un iespējas.</p>
           </div>
-           
-          <div class="service-offered-card" onclick="window.location.href='./restoration.html'" style="cursor: pointer;">
-            <img src="./res3.png" alt="Restoration" class="service-icon-img">
-            <h3>RESTAURĀCIJA</h3>
-            <p>Perfection 86 darbnīca nodarbojas ar profesionālu auto restaurāciju no A līdz Z! Ja Tavā īpašumā ir kāds sens vai īpašs auto, kuru skāris "laika zobs", bet vēlies tam dot otro dzīvību – mēs Tev palīdzēsim. Esam restaurējuši tādus ikoniskus auto kā Wandarer W23, Nissan Skyline R34, Toyota Supra, BMW E30, Toyota AE86 un daudz citu.</p>
+          
+          <div class="service-offered-card">
+            <img src="./evo.png" alt="Towing Truck" class="service-icon-img">
+            <h3>Autoevakuātora pakalpojumi</h3>
+            <p>Nereti gadās, ka dažādu iemeslu dēļ auto pēkšņi vairs nav iespējams iedarbināt vai nav iespējams piedalīties satiksmē. Visbiežāk šādu situāciju gadījumos pirmā doma ir – zvans draugam, bet ne vienmēr tas ir labākais risinājums.</p>
           </div>
          </div>
        </div>
@@ -2660,29 +2662,57 @@
         });
       }
       
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          const href = this.getAttribute('href');
-          if (href !== '#' && href.length > 1) {
+      // Smooth scroll for anchor links - improved version
+      function setupSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-              const offsetTop = target.offsetTop - 80;
-              window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-              });
+            e.stopPropagation();
+            const href = this.getAttribute('href');
+            
+            if (href && href !== '#' && href.length > 1) {
+              const target = document.querySelector(href);
               
-              // Close mobile menu if open
-              if (menuDropdown && menuDropdown.classList.contains('open')) {
-                menuDropdown.classList.remove('open');
-                menuBtn.classList.remove('open');
+              if (target) {
+                // Calculate offset based on screen size
+                const isMobile = window.innerWidth <= 768;
+                const headerOffset = isMobile ? 70 : 80;
+                
+                // Get element position relative to viewport
+                const elementPosition = target.getBoundingClientRect().top;
+                // Get current scroll position
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                // Calculate target scroll position
+                const targetScroll = elementPosition + currentScroll - headerOffset;
+                
+                // Scroll to element
+                window.scrollTo({
+                  top: Math.max(0, targetScroll),
+                  behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (menuDropdown && menuDropdown.classList.contains('open')) {
+                  menuDropdown.classList.remove('open');
+                  menuBtn.classList.remove('open');
+                  if (headerOverlay) {
+                    headerOverlay.classList.remove('active');
+                    if (headerOverlayMenuBtn) {
+                      headerOverlayMenuBtn.classList.remove('open');
+                    }
+                  }
+                }
               }
             }
-          }
+          });
         });
-      });
+      }
+      
+      // Setup smooth scroll
+      setupSmoothScroll();
+      
+      // Re-setup after dynamic content loads (if any)
+      setTimeout(setupSmoothScroll, 100);
       
       // Fade-in animation for service cards on scroll
       const serviceCards = document.querySelectorAll('.service-card');
